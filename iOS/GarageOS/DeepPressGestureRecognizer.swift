@@ -16,12 +16,14 @@ class DeepPressGestureRecognizer: UIGestureRecognizer
 {
     var vibrateOnDeepPress = true
     let threshold: CGFloat
+    let use3DTouch: Bool
     
     private var deepPressed: Bool = false
     
-    required init(target: AnyObject?, action: Selector, threshold: CGFloat)
+    required init(target: AnyObject?, action: Selector, threshold: CGFloat, use3DTouch: Bool)
     {
         self.threshold = threshold
+        self.use3DTouch = use3DTouch
         
         super.init(target: target, action: action)
     }
@@ -51,7 +53,7 @@ class DeepPressGestureRecognizer: UIGestureRecognizer
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent)
     {
         
-        state = deepPressed ? UIGestureRecognizerState.Ended : UIGestureRecognizerState.Failed
+        state = deepPressed || !use3DTouch ? UIGestureRecognizerState.Ended : UIGestureRecognizerState.Failed
         
         deepPressed = false
         
@@ -68,9 +70,6 @@ class DeepPressGestureRecognizer: UIGestureRecognizer
 
         if !deepPressed && (touch.force / touch.maximumPossibleForce) >= threshold
         {
-
-            //state = UIGestureRecognizerState.Began
-
             if vibrateOnDeepPress
             {
                 AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
@@ -85,6 +84,8 @@ class DeepPressGestureRecognizer: UIGestureRecognizer
             deepPressed = false
         }
     }
+    
+
 }
 
 // MARK: DeepPressable protocol extension
@@ -96,15 +97,15 @@ protocol DeepPressable
     func addGestureRecognizer(gestureRecognizer: UIGestureRecognizer)
     func removeGestureRecognizer(gestureRecognizer: UIGestureRecognizer)
     
-    func setDeepPressAction(target: AnyObject, action: Selector)
+    func setDeepPressAction(target: AnyObject, action: Selector, use3DTouch: Bool)
     func removeDeepPressAction()
 }
 
 extension DeepPressable
 {
-    func setDeepPressAction(target: AnyObject, action: Selector)
+    func setDeepPressAction(target: AnyObject, action: Selector, use3DTouch: Bool)
     {
-        let deepPressGestureRecognizer = DeepPressGestureRecognizer(target: target, action: action, threshold: 1)
+        let deepPressGestureRecognizer = DeepPressGestureRecognizer(target: target, action: action, threshold: 1, use3DTouch: use3DTouch)
         
         self.addGestureRecognizer(deepPressGestureRecognizer)
     }

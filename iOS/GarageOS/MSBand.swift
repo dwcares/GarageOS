@@ -63,6 +63,10 @@ class MSBand: NSObject, MSBClientManagerDelegate {
             let page = MSBPageLayout()
             page.root = flowList
             tile.pageLayouts.addObject(page)
+//            
+//            client.tileManager.removeTile(tile, completionHandler: { (error: NSError!) in
+//                print("deleted that tile")
+//            })
             
             client.tileManager.addTile(tile, completionHandler: { (error: NSError!) in
                 if error == nil || MSBErrorType(rawValue: error.code) == MSBErrorType.TileAlreadyExist {

@@ -23,8 +23,6 @@ class ViewController: UIViewController, MSBClientTileDelegate {
     
     var myPhoton : SparkDevice!
     var msBand : MSBand!
-
-    var settingUse3dTouch : Bool = false
     
     @IBOutlet var labelCar1Distance : UILabel!
     @IBOutlet var progressCar1Distance: UIProgressView!
@@ -46,14 +44,6 @@ class ViewController: UIViewController, MSBClientTileDelegate {
     @IBOutlet var smallDoorButton: DeepPressableButton!
     @IBOutlet var bigDoorButton: DeepPressableButton!
     
-    @IBAction func smallDoorButtonHandler(sender: UIButton) {
-        if (!settingUse3dTouch) { toggleDoor(false) }
-    }
-
-    @IBAction func bigDoorButtonHandler(sender: UIButton) {
-        if (!settingUse3dTouch) { toggleDoor(true) }
-    }
-    
     func bigDoorDeepPressHandler(value: DeepPressGestureRecognizer)
     {
         print("deeppress big")
@@ -73,39 +63,23 @@ class ViewController: UIViewController, MSBClientTileDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updateSettings()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateSettings),
-                                                         name: NSUserDefaultsDidChangeNotification, object: nil)
-
+        initDeepPressButtons()
         msBand = MSBand(bandTileDelegate: self)
         
         doParticleLogin(){_ in }
     }
     
-    func updateSettings() {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        
-        settingUse3dTouch = userDefaults.boolForKey("use_3d_touch")
-  
-        
-        if (settingUse3dTouch) {
-            initDeepPressButtons()
-        } else {
-            smallDoorButton.setDeepPressAction(self, action: nil)
-            bigDoorButton.setDeepPressAction(self, action: nil)
-        }
-
-    }
     
     func initDeepPressButtons() {
-        smallDoorButton.setDeepPressAction(self, action: #selector(self.smallDoorDeepPressHandler(_:)))
-        bigDoorButton.setDeepPressAction(self, action: #selector(self.bigDoorDeepPressHandler(_:)))
         
+        let is3DTouchAvailiable = self.traitCollection.forceTouchCapability == UIForceTouchCapability.Available
+ 
+        smallDoorButton.setDeepPressAction(self, action: #selector(self.smallDoorDeepPressHandler(_:)), use3DTouch:is3DTouchAvailiable)
+ 
         
+        bigDoorButton.setDeepPressAction(self, action: #selector(self.bigDoorDeepPressHandler(_:)), use3DTouch:is3DTouchAvailiable)
     }
-
-
-    
+  
     func updateDoorStatus(doorStatus:Bool, isDoor1:Bool) {
         
         if (isDoor1) {

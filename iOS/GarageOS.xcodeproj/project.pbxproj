@@ -20,7 +20,6 @@
 		98D7A7481C2C9B0700EE8B3E /* libSpark-SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D7A7471C2C9B0700EE8B3E /* libSpark-SDK.a */; };
 		98D7A74B1C3590C900EE8B3E /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7A74A1C3590C900EE8B3E /* Secrets.swift */; };
 		98D7A74C1C35997A00EE8B3E /* Secrets.swift in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D7A74A1C3590C900EE8B3E /* Secrets.swift */; };
-		98F04D911CC1224500157740 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 98F04D901CC1224500157740 /* Settings.bundle */; };
 		98F04D931CC125AF00157740 /* DeepPressableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F04D921CC125AF00157740 /* DeepPressableButton.swift */; };
 		98F04D961CC1311200157740 /* MSBand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F04D951CC1311200157740 /* MSBand.swift */; };
 		BDA4B73AB6031871BA556FFF /* libPods-GarageOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D57F90F754D05CD5DFA9419 /* libPods-GarageOS.a */; };
@@ -44,7 +43,6 @@
 		98D7A7471C2C9B0700EE8B3E /* libSpark-SDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libSpark-SDK.a"; path = "Pods/../build/Debug-iphoneos/libSpark-SDK.a"; sourceTree = "<group>"; };
 		98D7A7491C2C9C4800EE8B3E /* Swift-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Swift-Bridging-Header.h"; sourceTree = "<group>"; };
 		98D7A74A1C3590C900EE8B3E /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
-		98F04D901CC1224500157740 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		98F04D921CC125AF00157740 /* DeepPressableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepPressableButton.swift; sourceTree = "<group>"; };
 		98F04D951CC1311200157740 /* MSBand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSBand.swift; sourceTree = "<group>"; };
 		DACD8FB8F303E8F9B825F114 /* Pods-GarageOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GarageOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-GarageOS/Pods-GarageOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -120,7 +118,6 @@
 				980511641C2A18F000151D89 /* Info.plist */,
 				98D7A7491C2C9C4800EE8B3E /* Swift-Bridging-Header.h */,
 				9805115F1C2A18F000151D89 /* Assets.xcassets */,
-				98F04D901CC1224500157740 /* Settings.bundle */,
 			);
 			path = GarageOS;
 			sourceTree = "<group>";
@@ -196,7 +193,6 @@
 				980511601C2A18F000151D89 /* Assets.xcassets in Resources */,
 				98D46E891CBEEA9A00FC2056 /* smallIcon.png in Resources */,
 				9805115E1C2A18F000151D89 /* Main.storyboard in Resources */,
-				98F04D911CC1224500157740 /* Settings.bundle in Resources */,
 				98D46E8A1CBEEA9A00FC2056 /* tileIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
