@@ -41,8 +41,8 @@ class ViewController: UIViewController, MSBClientTileDelegate {
     @IBOutlet var labelBigDoorDuration: UILabel!
     
     
-    @IBOutlet var smallDoorButton: DeepPressableButton!
-    @IBOutlet var bigDoorButton: DeepPressableButton!
+    var smallDoorButton: DeepPressableButton!
+    var bigDoorButton: DeepPressableButton!
     
     func bigDoorDeepPressHandler(value: DeepPressGestureRecognizer)
     {

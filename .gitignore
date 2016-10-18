@@ -29,6 +29,9 @@ node_modules
 # Optional npm cache directory
 .npm
 
+.DS_Store
+Secrets.swift
+
 # Optional REPL history
 .node_repl_history
 
@@ -77,7 +80,7 @@ playground.xcworkspace
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
 #
 Pods/
-MicrosoftBandKit_iOS.framework/
+# MicrosoftBandKit_iOS.framework/
 
 # Carthage
 #
