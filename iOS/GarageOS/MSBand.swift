@@ -96,7 +96,8 @@ class MSBand: NSObject, MSBClientManagerDelegate {
     }
     
     func vibrate() {
-
+        if (self.bandClient == nil) { return }
+        
         self.bandClient.notificationManager.vibrateWithType(MSBNotificationVibrationType.OneTone) { (err:NSError!) in
             if (err == nil) {
                 print("vibrated")

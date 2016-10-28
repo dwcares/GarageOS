@@ -58,7 +58,7 @@ int const MAX_DOOR2_TICKS = 100;
 bool needsPublish = true;
 int lastPublish = 0;
 int const MIN_PUBLISH_DELTA = 1000;
-int const MAX_PUBLISH_DELTA = 10000;
+int const MAX_PUBLISH_DELTA = 60000;
 
 STARTUP(WiFi.selectAntenna(ANT_EXTERNAL));
 
@@ -75,11 +75,10 @@ void setup()
     Particle.variable("door2Status", &door2Status, INT);
     Particle.variable("car1Distance", &car1Distance, INT);
     Particle.variable("car2Distance", &car2Distance, INT);
-    Particle.variable("car1ParkingStatus", &car1ParkingStatus, INT);
-    Particle.variable("car2ParkingStatus", &car2ParkingStatus, INT);
+    Particle.variable("car1Status", &car1ParkingStatus, INT);
+    Particle.variable("car2Status", &car2ParkingStatus, INT);
     Particle.variable("wifiStrength", &wifiStrength, INT);
 
-    Particle.function("requestUpdate", requestUpdate);
     Particle.function("toggleDoor", toggleDoor);
     
     door1SensorStats.clear();
@@ -235,12 +234,15 @@ void monitorDoorStatusChange() {
         needsPublish = true;
         
         door1LastOpenTime = (door1Status == DOOR_STATUS_OPEN) ? millis() : 0;
+        //publish("door-status-change/door1", door1Status);
     }
     
     if (tempDoor2Status != door2Status) {
         needsPublish = true;
         
         door2LastOpenTime = (door2Status == DOOR_STATUS_OPEN) ? millis() : 0;
+
+       // publish("door-status-change/door2", door2Status);
     }
     
      updateOpenDuration();
@@ -293,7 +295,7 @@ void heartbeat()
 }
 
 void publish(String eventName, int message) {
-    publish(eventName, String(message)); 
+    publish(eventName, String(message)); //.c_str()
 }
 
 void publish(String eventName, String message) {
@@ -322,6 +324,3 @@ int requestUpdate(String command)
   needsPublish = true;
   return 1;
 }
-
-
-

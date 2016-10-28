@@ -112,7 +112,12 @@ class ViewController: UIViewController, MSBClientTileDelegate {
         
         labelSignal.text = String(signalStrength) + "db"
         labelLastUpdate.text = lastUpdate
-        labelUptime.text = uptime.msToSeconds.minuteSecondMS
+        
+        if (uptime > 0 ) {
+            labelUptime.text = uptime.msToSeconds.minuteSecondMS
+        } else {
+            labelUptime.text = ""
+        }
 
     }
     
@@ -181,6 +186,7 @@ class ViewController: UIViewController, MSBClientTileDelegate {
                     (device: SparkDevice?) in
                     
                     self.myPhoton = device
+                    self.getInitialState()
                     self.subscribeToEvents()
                 }
                 
@@ -199,6 +205,53 @@ class ViewController: UIViewController, MSBClientTileDelegate {
         })
     }
     
+    func getInitialState() {
+        self.myPhoton.getVariable("door1Status", completion: {
+            (result: AnyObject?, error:NSError?) -> Void in
+            if error != nil {
+                print("Failed getting initial door 1 state")
+            }
+            else {
+                self.updateDoorStatus(result as! Bool, isDoor1: true)
+            }
+        })
+        
+        self.myPhoton.getVariable("door2Status", completion: {
+            (result: AnyObject?, error:NSError?) -> Void in
+            if error != nil {
+                print("Failed getting initial door 2 state")
+            }
+            else {
+                self.updateDoorStatus(result as! Bool, isDoor1: false)
+            }
+        })
+        
+        self.myPhoton.getVariable("car1Distance", completion: {
+            (result: AnyObject?, error:NSError?) -> Void in
+            if error != nil {
+                print("Failed getting car 1 distance")
+            }
+            else {
+                self.updateCarDistanceInfo(result as! Int, isCar1: true)
+            }
+        })
+        
+        self.myPhoton.getVariable("wifiStrength", completion: {
+            (result: AnyObject?, error:NSError?) -> Void in
+            if error != nil {
+                print("Failed getting car 1 distance")
+            }
+            else {
+                self.updateStatusInfo(result as! Int,
+                    lastUpdate: self.getTimeStamp(),
+                    uptime: 0)
+            }
+        })
+
+        
+
+    }
+    
     func subscribeToEvents() {
         
         SparkCloud.sharedInstance().subscribeToDeviceEventsWithPrefix("heartbeat", deviceID: Secrets.particleDeviceID, handler: { (event, error) in
@@ -207,9 +260,6 @@ class ViewController: UIViewController, MSBClientTileDelegate {
             print("'heartbeat' event received: \(event)")
             self.onHeartbeat(event.data)
         })
-        
-        self.requestInitialState()
-        
     }
     
     func onHeartbeat(data: String) {
@@ -235,13 +285,6 @@ class ViewController: UIViewController, MSBClientTileDelegate {
         } catch {
             print("error serializing JSON: \(error)")
         }
-    }
-    
-    func requestInitialState() {
-        if (myPhoton == nil) { return }
-        
-        myPhoton.callFunction("requestUpdate", withArguments: nil, completion: nil)
-        
     }
     
     func toggleDoor(isDoor1:Bool) {
