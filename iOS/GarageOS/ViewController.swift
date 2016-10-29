@@ -69,14 +69,11 @@ class ViewController: UIViewController, MSBClientTileDelegate {
         doParticleLogin(){_ in }
     }
     
-    
     func initDeepPressButtons() {
         
         let is3DTouchAvailiable = self.traitCollection.forceTouchCapability == UIForceTouchCapability.Available
  
         smallDoorButton.setDeepPressAction(self, action: #selector(self.smallDoorDeepPressHandler(_:)), use3DTouch:is3DTouchAvailiable)
- 
-        
         bigDoorButton.setDeepPressAction(self, action: #selector(self.bigDoorDeepPressHandler(_:)), use3DTouch:is3DTouchAvailiable)
     }
   
@@ -186,11 +183,13 @@ class ViewController: UIViewController, MSBClientTileDelegate {
                     (device: SparkDevice?) in
                     
                     self.myPhoton = device
-                    self.getInitialState()
                     self.subscribeToEvents()
+                    
+                    if ((self.smallDoorStatus) != nil) { self.getInitialState() }
+
+                    completion(result: true);
+
                 }
-                
-                completion(result: true);
             }
         }
     }
@@ -248,8 +247,6 @@ class ViewController: UIViewController, MSBClientTileDelegate {
             }
         })
 
-        
-
     }
     
     func subscribeToEvents() {
@@ -270,15 +267,17 @@ class ViewController: UIViewController, MSBClientTileDelegate {
             print(json);
             
             dispatch_async(dispatch_get_main_queue(), {
+                if (self.smallDoorStatus != nil) {
+
+                    self.updateCarDistanceInfo(json["car1Distance"] as! Int, isCar1: true)
+                    self.updateDoorStatus(json["door1Status"] as! Bool, isDoor1: true)
+                    self.updateDoorStatus(json["door2Status"] as! Bool, isDoor1: false)
+                    self.updateStatusInfo(json["wifiStrength"] as! Int,
+                        lastUpdate: self.getTimeStamp(),
+                        uptime: Int(json["uptime"] as! String)!)
                 
-                self.updateCarDistanceInfo(json["car1Distance"] as! Int, isCar1: true)
-                self.updateDoorStatus(json["door1Status"] as! Bool, isDoor1: true)
-                self.updateDoorStatus(json["door2Status"] as! Bool, isDoor1: false)
-                self.updateStatusInfo(json["wifiStrength"] as! Int,
-                    lastUpdate: self.getTimeStamp(),
-                    uptime: Int(json["uptime"] as! String)!)
-                
-                self.updateDoorDurationInfo(json["door1OpenDuration"] as! Int, bigDoorDuration: json["door2OpenDuration"] as! Int)
+                    self.updateDoorDurationInfo(json["door1OpenDuration"] as! Int, bigDoorDuration: json["door2OpenDuration"] as! Int)
+                }
                 
             })
             
@@ -304,13 +303,13 @@ class ViewController: UIViewController, MSBClientTileDelegate {
         let doorNumber = isDoor1 ? "r2" : "r1"
         let funcArgs = [doorNumber]
         
-        myPhoton.callFunction("toggleDoor", withArguments: funcArgs) { (resultCode : NSNumber!, error : NSError!) -> Void in
-            if (error == nil) {
-                print("The door is opening")
-                if (self.msBand != nil) { self.msBand.vibrate() }
-                
-            }
-        }
+//        myPhoton.callFunction("toggleDoor", withArguments: funcArgs) { (resultCode : NSNumber!, error : NSError!) -> Void in
+//            if (error == nil) {
+//                print("The door is opening")
+//                if (self.msBand != nil) { self.msBand.vibrate() }
+//                
+//            }
+//        }
     }
     
     func getTimeStamp() -> String {

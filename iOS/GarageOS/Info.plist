@@ -42,5 +42,24 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeConfirmation</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Small Door</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>com.TheRobot.GarageOS.Door2</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeConfirmation</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Big Door</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>com.TheRobot.GarageOS.Door1</string>
+		</dict>
+	</array>
 </dict>
 </plist>

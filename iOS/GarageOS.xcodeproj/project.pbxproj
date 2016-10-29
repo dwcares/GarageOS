@@ -14,16 +14,14 @@
 		980511601C2A18F000151D89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9805115F1C2A18F000151D89 /* Assets.xcassets */; };
 		980511631C2A18F000151D89 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 980511611C2A18F000151D89 /* LaunchScreen.storyboard */; };
 		98A719EB1CB5D909004AB929 /* DeepPressGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A719EA1CB5D909004AB929 /* DeepPressGestureRecognizer.swift */; };
-		98C3B63A1CB7FB0800B02746 /* MicrosoftBandKit_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C3B6391CB7FB0800B02746 /* MicrosoftBandKit_iOS.framework */; };
 		98C3B63D1CB7FB4B00B02746 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C3B63C1CB7FB4B00B02746 /* CoreBluetooth.framework */; };
 		98D46E891CBEEA9A00FC2056 /* smallIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 98D46E871CBEEA9A00FC2056 /* smallIcon.png */; };
 		98D46E8A1CBEEA9A00FC2056 /* tileIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 98D46E881CBEEA9A00FC2056 /* tileIcon.png */; };
 		98D7A7481C2C9B0700EE8B3E /* libSpark-SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D7A7471C2C9B0700EE8B3E /* libSpark-SDK.a */; };
-		98D7A74B1C3590C900EE8B3E /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D7A74A1C3590C900EE8B3E /* Secrets.swift */; };
-		98D7A74C1C35997A00EE8B3E /* Secrets.swift in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D7A74A1C3590C900EE8B3E /* Secrets.swift */; };
 		98F04D931CC125AF00157740 /* DeepPressableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F04D921CC125AF00157740 /* DeepPressableButton.swift */; };
 		98F04D961CC1311200157740 /* MSBand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F04D951CC1311200157740 /* MSBand.swift */; };
 		F146C5CA1DB6DA1400C592DB /* MicrosoftBandKit_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F146C5C91DB6DA1400C592DB /* MicrosoftBandKit_iOS.framework */; };
+		F1C412381DC51F18009213AE /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C412371DC51F18009213AE /* Secrets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,10 +41,10 @@
 		98D46E881CBEEA9A00FC2056 /* tileIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tileIcon.png; sourceTree = "<group>"; };
 		98D7A7471C2C9B0700EE8B3E /* libSpark-SDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libSpark-SDK.a"; path = "Pods/../build/Debug-iphoneos/libSpark-SDK.a"; sourceTree = "<group>"; };
 		98D7A7491C2C9C4800EE8B3E /* Swift-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Swift-Bridging-Header.h"; sourceTree = "<group>"; };
-		98D7A74A1C3590C900EE8B3E /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		98F04D921CC125AF00157740 /* DeepPressableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepPressableButton.swift; sourceTree = "<group>"; };
 		98F04D951CC1311200157740 /* MSBand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSBand.swift; sourceTree = "<group>"; };
 		F146C5C91DB6DA1400C592DB /* MicrosoftBandKit_iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MicrosoftBandKit_iOS.framework; sourceTree = "<group>"; };
+		F1C412371DC51F18009213AE /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		FCE44FB7D07726651C1AD380 /* Pods-GarageOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GarageOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GarageOS/Pods-GarageOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,9 +55,7 @@
 			files = (
 				98C3B63D1CB7FB4B00B02746 /* CoreBluetooth.framework in Frameworks */,
 				F146C5CA1DB6DA1400C592DB /* MicrosoftBandKit_iOS.framework in Frameworks */,
-				98D7A74C1C35997A00EE8B3E /* Secrets.swift in Frameworks */,
 				98D7A7481C2C9B0700EE8B3E /* libSpark-SDK.a in Frameworks */,
-				98C3B63A1CB7FB0800B02746 /* MicrosoftBandKit_iOS.framework in Frameworks */,
 				9205E37974CB8F704317DE06 /* libPods-GarageOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -109,9 +105,9 @@
 		980511571C2A18F000151D89 /* GarageOS */ = {
 			isa = PBXGroup;
 			children = (
+				F1C412371DC51F18009213AE /* Secrets.swift */,
 				9805115A1C2A18F000151D89 /* ViewController.swift */,
 				98F04D951CC1311200157740 /* MSBand.swift */,
-				98D7A74A1C3590C900EE8B3E /* Secrets.swift */,
 				98F04D921CC125AF00157740 /* DeepPressableButton.swift */,
 				98A719EA1CB5D909004AB929 /* DeepPressGestureRecognizer.swift */,
 				980511581C2A18F000151D89 /* AppDelegate.swift */,
@@ -258,9 +254,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9805115B1C2A18F000151D89 /* ViewController.swift in Sources */,
+				F1C412381DC51F18009213AE /* Secrets.swift in Sources */,
 				98F04D931CC125AF00157740 /* DeepPressableButton.swift in Sources */,
 				98F04D961CC1311200157740 /* MSBand.swift in Sources */,
-				98D7A74B1C3590C900EE8B3E /* Secrets.swift in Sources */,
 				98A719EB1CB5D909004AB929 /* DeepPressGestureRecognizer.swift in Sources */,
 				980511591C2A18F000151D89 /* AppDelegate.swift in Sources */,
 			);
@@ -326,7 +322,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -366,7 +362,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
