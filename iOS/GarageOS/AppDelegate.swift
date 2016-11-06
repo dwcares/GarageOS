@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -18,15 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var launchedShortcutItem: UIApplicationShortcutItem?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-         var shouldPerformAdditionalDelegateHandling = true
-        
         if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsShortcutItemKey] as? UIApplicationShortcutItem {
-            
             launchedShortcutItem = shortcutItem
-            shouldPerformAdditionalDelegateHandling = false
         }
         
-        return shouldPerformAdditionalDelegateHandling
+        BITHockeyManager.sharedHockeyManager().configureWithIdentifier("33d30f9d73cb41c8816289c0344623c9")
+        BITHockeyManager.sharedHockeyManager().startManager()
+        BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
+        
+        return true
     }
     
     func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: Bool -> Void) {
@@ -34,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         completionHandler(handledShortCutItem)
     }
+    
     
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -50,11 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(application: UIApplication) {
-        guard let shortcut = launchedShortcutItem else { return }
-        
-        handleShortCutItem(shortcut)
-        
-        launchedShortcutItem = nil
+
     }
     
     func applicationWillTerminate(application: UIApplication) {

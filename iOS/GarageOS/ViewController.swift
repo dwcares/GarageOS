@@ -67,6 +67,8 @@ class ViewController: UIViewController, MSBClientTileDelegate {
         msBand = MSBand(bandTileDelegate: self)
         
         doParticleLogin(){_ in }
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.getInitialState), name: UIApplicationWillEnterForegroundNotification, object: nil)
     }
     
     func initDeepPressButtons() {
@@ -78,27 +80,30 @@ class ViewController: UIViewController, MSBClientTileDelegate {
     }
   
     func updateDoorStatus(doorStatus:Bool, isDoor1:Bool) {
+        if (self.smallDoorStatus == nil) { return };
         
         if (isDoor1) {
             print("Door 1: \(doorStatus)")
-            smallDoorStatus.alpha = doorStatus ? 1 : 0.3
+            self.smallDoorStatus.alpha = doorStatus ? 1 : 0.3
         } else {
             print("Door 2: \(doorStatus)")
-            bigDoorStatus.alpha = doorStatus ? 1 : 0.3
+            self.bigDoorStatus.alpha = doorStatus ? 1 : 0.3
         }
     }
     
     
     func updateCarDistanceInfo(carDistance:Int, isCar1:Bool) {
+        if (self.smallDoorStatus == nil) { return };
+
         if (carDistance > CAR1_MAXDISTANCE || carDistance <= 0) {
-            labelCar1Distance.text = "Not parked"
-            progressCar1Distance.progress = 0
+            self.labelCar1Distance.text = "Not parked"
+            self.progressCar1Distance.progress = 0
             
         } else {
-            labelCar1Distance.text = String(carDistance) + "\""
+            self.labelCar1Distance.text = String(carDistance) + "\""
             
             let boundedProgress = min(max(carDistance,CAR1_MINDISTANCE), CAR1_MAXDISTANCE)
-            progressCar1Distance.progress = 1 - Float(boundedProgress - CAR1_MINDISTANCE) /
+            self.progressCar1Distance.progress = 1 - Float(boundedProgress - CAR1_MINDISTANCE) /
                 Float(CAR1_MAXDISTANCE - CAR1_MINDISTANCE)
         }
         
@@ -106,29 +111,30 @@ class ViewController: UIViewController, MSBClientTileDelegate {
     }
     
     func updateStatusInfo(signalStrength:Int, lastUpdate:String, uptime: Int) {
-        
-        labelSignal.text = String(signalStrength) + "db"
-        labelLastUpdate.text = lastUpdate
+        if (self.smallDoorStatus == nil) { return };
+
+        self.labelSignal.text = String(signalStrength) + "db"
+        self.labelLastUpdate.text = lastUpdate
         
         if (uptime > 0 ) {
-            labelUptime.text = uptime.msToSeconds.minuteSecondMS
-        } else {
-            labelUptime.text = ""
+            self.labelUptime.text = uptime.msToSeconds.minuteSecondMS
         }
 
     }
     
     func updateDoorDurationInfo(smallDoorDuration:Int, bigDoorDuration:Int) {
+        if (self.smallDoorStatus == nil) { return };
+
         if (smallDoorDuration > 0) {
-            labelSmallDoorDuration.text = smallDoorDuration.msToSeconds.minuteSecondMS
+            self.labelSmallDoorDuration.text = smallDoorDuration.msToSeconds.minuteSecondMS
         } else {
-            labelSmallDoorDuration.text = ""
+            self.labelSmallDoorDuration.text = ""
         }
         
         if (bigDoorDuration > 0 ) {
-            labelBigDoorDuration.text = bigDoorDuration.msToSeconds.minuteSecondMS
+            self.labelBigDoorDuration.text = bigDoorDuration.msToSeconds.minuteSecondMS
         } else  {
-            labelBigDoorDuration.text = ""
+            self.labelBigDoorDuration.text = ""
         }
    
     }
@@ -185,7 +191,7 @@ class ViewController: UIViewController, MSBClientTileDelegate {
                     self.myPhoton = device
                     self.subscribeToEvents()
                     
-                    if ((self.smallDoorStatus) != nil) { self.getInitialState() }
+                    self.getInitialState()
 
                     completion(result: true);
 
@@ -205,6 +211,8 @@ class ViewController: UIViewController, MSBClientTileDelegate {
     }
     
     func getInitialState() {
+        if (self.myPhoton == nil || self.smallDoorStatus == nil) { return; }
+        
         self.myPhoton.getVariable("door1Status", completion: {
             (result: AnyObject?, error:NSError?) -> Void in
             if error != nil {
@@ -246,16 +254,23 @@ class ViewController: UIViewController, MSBClientTileDelegate {
                     uptime: 0)
             }
         })
-
     }
     
     func subscribeToEvents() {
         
         SparkCloud.sharedInstance().subscribeToDeviceEventsWithPrefix("heartbeat", deviceID: Secrets.particleDeviceID, handler: { (event, error) in
-            guard error == nil else { NSLog("Error subscribing to 'uptime' event: \(error)"); return }
+            guard error == nil else { NSLog("Error subscribing to 'heartbeat' event: \(error)"); return }
             
             print("'heartbeat' event received: \(event)")
             self.onHeartbeat(event.data)
+        })
+        
+        SparkCloud.sharedInstance().subscribeToDeviceEventsWithPrefix("door-status-change", deviceID: Secrets.particleDeviceID, handler: { (event, error) in
+            guard error == nil else { NSLog("Error subscribing to 'door-status-change' event: \(error)"); return }
+            
+            print("'door-status-change' event received: \(event)")
+            
+            self.updateDoorStatus((event.data.containsString("1")), isDoor1: event.event.containsString("door2"))
         })
     }
     
@@ -303,13 +318,13 @@ class ViewController: UIViewController, MSBClientTileDelegate {
         let doorNumber = isDoor1 ? "r2" : "r1"
         let funcArgs = [doorNumber]
         
-//        myPhoton.callFunction("toggleDoor", withArguments: funcArgs) { (resultCode : NSNumber!, error : NSError!) -> Void in
-//            if (error == nil) {
-//                print("The door is opening")
-//                if (self.msBand != nil) { self.msBand.vibrate() }
-//                
-//            }
-//        }
+        myPhoton.callFunction("toggleDoor", withArguments: funcArgs) { (resultCode : NSNumber!, error : NSError!) -> Void in
+            if (error == nil) {
+                print("The door is opening")
+                if (self.msBand != nil) { self.msBand.vibrate() }
+                
+            }
+        }
     }
     
     func getTimeStamp() -> String {

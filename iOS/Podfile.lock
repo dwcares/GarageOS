@@ -20,6 +20,9 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - HockeySDK (4.1.2):
+    - HockeySDK/DefaultLib (= 4.1.2)
+  - HockeySDK/DefaultLib (4.1.2)
   - Spark-SDK (0.3.4):
     - Spark-SDK/Helpers (= 0.3.4)
     - Spark-SDK/SDK (= 0.3.4)
@@ -29,12 +32,14 @@ PODS:
     - Spark-SDK/Helpers
 
 DEPENDENCIES:
+  - HockeySDK (~> 4.1.2)
   - Spark-SDK
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
+  HockeySDK: c7523379550a4305cefc1cdfa7b5f9a5a3538180
   Spark-SDK: f5dad30a5afa319f43ca570a64f241c73c693641
 
-PODFILE CHECKSUM: 2b029d0981b0266d8c72df7be11ec496ba71a1c0
+PODFILE CHECKSUM: d63b446d9a3b467fa38867760d3b884f0ca521c6
 
 COCOAPODS: 1.1.0.rc.3

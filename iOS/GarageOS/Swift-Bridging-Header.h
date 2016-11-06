@@ -7,6 +7,6 @@
 
 #include "Spark-SDK.h"
 #import <MicrosoftBandKit_iOS/MicrosoftBandKit_iOS.h>
-
+#import <HockeySDK/HockeySDK.h>
 
 #endif
