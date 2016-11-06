@@ -54,7 +54,7 @@ So the first and most obvious thing for me to build was to open and close the do
 
  It turns out, doing this is amazingly easy with a Particle Photon and a relay. A relay is like a digitally controlled switch. It's just as easy to use as turning an LED on and off (the 'hello world' of IoT Projects) but instead of turning a light on, it changes the world around you by switching potentially higher voltage stuff like Christmas lights, rocket launch circuits, or in this case a garage door. To control it from the internet, all I did was follow the Particle: [Control an LED from the 'nets](https://docs.particle.io/guide/getting-started/examples/photon/#control-leds-over-the-39-net) sample and replace LED in the circuit with the relay. Sweet. I hooked the other side of the relay up to the door switch on the wall, and I was in business!
  
- ### Step 2: Reading the Garage Door State
+### Step 2: Reading the Garage Door State
  
  *But, is the door open tho?*
  
@@ -64,7 +64,7 @@ So the first and most obvious thing for me to build was to open and close the do
  
  After a tiny bit of reseach I found a Magnetic Reed Switch. It's basically, what you see on those window security systems. One side is a basic magnet, and the other side is a switch that closes when another magnet is nearby. For the garage door, I put a heavy duty magnet on the door, and a mounted the switch on the wall so when the door was closed, the magnet would line up with the switch. When the door was open, the switch would be open. Then it was just a matter of running a bunch of wires through the rafters from the door to the Photon, mounted by the wall.
  
- ### Step 3: Parking distance
+### Step 3: Parking distance
 The next thing we want to be able to do is to read the parking distance of the car the car parked in the garage. Essentially, how far is the car parked from the wall? Then we want to indicate to the driver of the car with some sort of visual status that they've parked correctly, or parked too close.
 
 *Ultrasonic ping sensor* 
