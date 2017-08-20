@@ -44,14 +44,14 @@ class ViewController: UIViewController, MSBClientTileDelegate {
     var smallDoorButton: DeepPressableButton!
     var bigDoorButton: DeepPressableButton!
     
-    func bigDoorDeepPressHandler(value: DeepPressGestureRecognizer)
+    func bigDoorDeepPressHandler(_ value: DeepPressGestureRecognizer)
     {
         print("deeppress big")
         toggleDoor(true)
         
     }
     
-    func smallDoorDeepPressHandler(value: DeepPressGestureRecognizer)
+    func smallDoorDeepPressHandler(_ value: DeepPressGestureRecognizer)
     {
         print("deeppress small")
         
@@ -68,19 +68,22 @@ class ViewController: UIViewController, MSBClientTileDelegate {
         
         doParticleLogin(){_ in }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.getInitialState), name: UIApplicationWillEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.getInitialState), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        
     }
-    
+
     func initDeepPressButtons() {
         
-        let is3DTouchAvailiable = self.traitCollection.forceTouchCapability == UIForceTouchCapability.Available
+        let is3DTouchAvailiable = self.traitCollection.forceTouchCapability == UIForceTouchCapability.available
  
         smallDoorButton.setDeepPressAction(self, action: #selector(self.smallDoorDeepPressHandler(_:)), use3DTouch:is3DTouchAvailiable)
         bigDoorButton.setDeepPressAction(self, action: #selector(self.bigDoorDeepPressHandler(_:)), use3DTouch:is3DTouchAvailiable)
     }
   
-    func updateDoorStatus(doorStatus:Bool, isDoor1:Bool) {
+    func updateDoorStatus(_ doorStatus:Bool, isDoor1:Bool) {
         if (self.smallDoorStatus == nil) { return };
+        
+
         
         if (isDoor1) {
             print("Door 1: \(doorStatus)")
@@ -89,10 +92,12 @@ class ViewController: UIViewController, MSBClientTileDelegate {
             print("Door 2: \(doorStatus)")
             self.bigDoorStatus.alpha = doorStatus ? 1 : 0.3
         }
+        
+        updateBadgeNumber(Int(self.smallDoorStatus.alpha) + Int(self.smallDoorStatus.alpha))
     }
     
     
-    func updateCarDistanceInfo(carDistance:Int, isCar1:Bool) {
+    func updateCarDistanceInfo(_ carDistance:Int, isCar1:Bool) {
         if (self.smallDoorStatus == nil) { return };
 
         if (carDistance > CAR1_MAXDISTANCE || carDistance <= 0) {
@@ -110,7 +115,7 @@ class ViewController: UIViewController, MSBClientTileDelegate {
         print("Car 1: \(carDistance) inches")
     }
     
-    func updateStatusInfo(signalStrength:Int, lastUpdate:String, uptime: Int) {
+    func updateStatusInfo(_ signalStrength:Int, lastUpdate:String, uptime: Int) {
         if (self.smallDoorStatus == nil) { return };
 
         self.labelSignal.text = String(signalStrength) + "db"
@@ -122,7 +127,7 @@ class ViewController: UIViewController, MSBClientTileDelegate {
 
     }
     
-    func updateDoorDurationInfo(smallDoorDuration:Int, bigDoorDuration:Int) {
+    func updateDoorDurationInfo(_ smallDoorDuration:Int, bigDoorDuration:Int) {
         if (self.smallDoorStatus == nil) { return };
 
         if (smallDoorDuration > 0) {
@@ -139,31 +144,31 @@ class ViewController: UIViewController, MSBClientTileDelegate {
    
     }
     
-    override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval)
+    override func willAnimateRotation(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval)
     {
         if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation))
         {
             
-            labelSignal.hidden = false
-            labelUptime.hidden = false
-            labelLastUpdate.hidden = false
-            labelUISignal.hidden = false
-            labelUIUptime.hidden = false
-            labelUILastUpdate.hidden = false
-            labelSmallDoorDuration.hidden = false
-            labelBigDoorDuration.hidden = false
+            labelSignal.isHidden = false
+            labelUptime.isHidden = false
+            labelLastUpdate.isHidden = false
+            labelUISignal.isHidden = false
+            labelUIUptime.isHidden = false
+            labelUILastUpdate.isHidden = false
+            labelSmallDoorDuration.isHidden = false
+            labelBigDoorDuration.isHidden = false
         }
         else
         {
             
-            labelSignal.hidden = true
-            labelUptime.hidden = true
-            labelLastUpdate.hidden = true
-            labelUISignal.hidden = true
-            labelUIUptime.hidden = true
-            labelUILastUpdate.hidden = true
-            labelSmallDoorDuration.hidden = true
-            labelBigDoorDuration.hidden = true
+            labelSignal.isHidden = true
+            labelUptime.isHidden = true
+            labelLastUpdate.isHidden = true
+            labelUISignal.isHidden = true
+            labelUIUptime.isHidden = true
+            labelUILastUpdate.isHidden = true
+            labelSmallDoorDuration.isHidden = true
+            labelBigDoorDuration.isHidden = true
         }
     }
     
@@ -176,11 +181,11 @@ class ViewController: UIViewController, MSBClientTileDelegate {
     // Mark - Particle device communication
     
     
-    func doParticleLogin(completion: (result: Bool) -> Void) {
-        SparkCloud.sharedInstance().loginWithUser(Secrets.particleUser, password: Secrets.particlePassword) { (error:NSError!) -> Void in
+    func doParticleLogin(_ completion: @escaping (_ result: Bool) -> Void) {
+        SparkCloud.sharedInstance().login(withUser: Secrets.particleUser, password: Secrets.particlePassword) { (error:Error?) -> Void in
             if let _=error {
                 print("Wrong credentials or no internet connectivity, please try again")
-                completion(result: false)
+                completion(false)
             }
             else {
                 print("Logged in")
@@ -193,28 +198,35 @@ class ViewController: UIViewController, MSBClientTileDelegate {
                     
                     self.getInitialState()
 
-                    completion(result: true);
+                    completion(true);
 
                 }
             }
         }
     }
     
-    func getDevice(id: String, completion: (result: SparkDevice?) -> Void) {
-        SparkCloud.sharedInstance().getDevice(id, completion: { (device:SparkDevice!, error:NSError!) -> Void in
+    func getDevice(_ id: String, completion: @escaping (_ result: SparkDevice?) -> Void) {
+        SparkCloud.sharedInstance().getDevice(id, completion: { (device:SparkDevice?, error:Error?) -> Void in
             if let _ = device {
-                completion(result: device)
+                completion(device)
             } else {
-                completion(result: nil)
+                completion(nil)
             }
         })
     }
     
+    func updateBadgeNumber(_ number: Int) {
+        UIApplication.shared.applicationIconBadgeNumber = number
+
+    }
+    
     func getInitialState() {
+        updateBadgeNumber(0)
+
         if (self.myPhoton == nil || self.smallDoorStatus == nil) { return; }
         
         self.myPhoton.getVariable("door1Status", completion: {
-            (result: AnyObject?, error:NSError?) -> Void in
+            (result: Any?, error:Error?) -> Void in
             if error != nil {
                 print("Failed getting initial door 1 state")
             }
@@ -224,7 +236,7 @@ class ViewController: UIViewController, MSBClientTileDelegate {
         })
         
         self.myPhoton.getVariable("door2Status", completion: {
-            (result: AnyObject?, error:NSError?) -> Void in
+            (result: Any?, error:Error?) -> Void in
             if error != nil {
                 print("Failed getting initial door 2 state")
             }
@@ -234,7 +246,7 @@ class ViewController: UIViewController, MSBClientTileDelegate {
         })
         
         self.myPhoton.getVariable("car1Distance", completion: {
-            (result: AnyObject?, error:NSError?) -> Void in
+            (result: Any?, error:Error?) -> Void in
             if error != nil {
                 print("Failed getting car 1 distance")
             }
@@ -244,7 +256,7 @@ class ViewController: UIViewController, MSBClientTileDelegate {
         })
         
         self.myPhoton.getVariable("wifiStrength", completion: {
-            (result: AnyObject?, error:NSError?) -> Void in
+            (result: Any?, error:Error?) -> Void in
             if error != nil {
                 print("Failed getting car 1 distance")
             }
@@ -258,30 +270,30 @@ class ViewController: UIViewController, MSBClientTileDelegate {
     
     func subscribeToEvents() {
         
-        SparkCloud.sharedInstance().subscribeToDeviceEventsWithPrefix("heartbeat", deviceID: Secrets.particleDeviceID, handler: { (event, error) in
+        SparkCloud.sharedInstance().subscribeToDeviceEvents(withPrefix: "heartbeat", deviceID: Secrets.particleDeviceID, handler: { (event, error) in
             guard error == nil else { NSLog("Error subscribing to 'heartbeat' event: \(error)"); return }
             
             print("'heartbeat' event received: \(event)")
-            self.onHeartbeat(event.data)
+            self.onHeartbeat((event?.data)!)
         })
         
-        SparkCloud.sharedInstance().subscribeToDeviceEventsWithPrefix("door-status-change", deviceID: Secrets.particleDeviceID, handler: { (event, error) in
+        SparkCloud.sharedInstance().subscribeToDeviceEvents(withPrefix: "door-status-change", deviceID: Secrets.particleDeviceID, handler: { (event, error) in
             guard error == nil else { NSLog("Error subscribing to 'door-status-change' event: \(error)"); return }
             
             print("'door-status-change' event received: \(event)")
             
-            self.updateDoorStatus((event.data.containsString("1")), isDoor1: event.event.containsString("door2"))
+            self.updateDoorStatus((event?.data.contains("1"))!, isDoor1: (event?.event.contains("door2"))!)
         })
     }
     
-    func onHeartbeat(data: String) {
+    func onHeartbeat(_ data: String) {
         
         do {
-            let json = try NSJSONSerialization.JSONObjectWithData(data.dataUsingEncoding(NSASCIIStringEncoding)!, options: .AllowFragments)
+            let json = try JSONSerialization.jsonObject(with: data.data(using: String.Encoding.ascii)!, options: .allowFragments) as! [String:AnyObject]
             
             print(json);
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 if (self.smallDoorStatus != nil) {
 
                     self.updateCarDistanceInfo(json["car1Distance"] as! Int, isCar1: true)
@@ -301,7 +313,7 @@ class ViewController: UIViewController, MSBClientTileDelegate {
         }
     }
     
-    func toggleDoor(isDoor1:Bool) {
+    func toggleDoor(_ isDoor1:Bool) {
         if myPhoton == nil {
             print("Particle not yet loaded")
             
@@ -314,11 +326,11 @@ class ViewController: UIViewController, MSBClientTileDelegate {
         }
     }
     
-    func doToggleDoor(isDoor1:Bool) {
+    func doToggleDoor(_ isDoor1:Bool) {
         let doorNumber = isDoor1 ? "r2" : "r1"
         let funcArgs = [doorNumber]
         
-        myPhoton.callFunction("toggleDoor", withArguments: funcArgs) { (resultCode : NSNumber!, error : NSError!) -> Void in
+        myPhoton.callFunction("toggleDoor", withArguments: funcArgs) { (resultCode : NSNumber?, error : Error?) -> Void in
             if (error == nil) {
                 print("The door is opening")
                 if (self.msBand != nil) { self.msBand.vibrate() }
@@ -328,13 +340,13 @@ class ViewController: UIViewController, MSBClientTileDelegate {
     }
     
     func getTimeStamp() -> String {
-        return NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .NoStyle, timeStyle: .MediumStyle)
+        return DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .medium)
     }
     
     // MARK - MSBand Client Tile Delegate
-    func client(client: MSBClient!, buttonDidPress event: MSBTileButtonEvent!) {
+    func client(_ client: MSBClient!, buttonDidPress event: MSBTileButtonEvent!) {
         
-        if (event.pageId.UUIDString == BAND_PAGE1_ID) {
+        if (event.pageId.uuidString == BAND_PAGE1_ID) {
             print("open small from band")
             toggleDoor(false)
         } else {
@@ -345,22 +357,22 @@ class ViewController: UIViewController, MSBClientTileDelegate {
         print("\(event.description)")
     }
     
-    func client(client: MSBClient!, tileDidClose event: MSBTileEvent!) {
+    func client(_ client: MSBClient!, tileDidClose event: MSBTileEvent!) {
         print("\(event.description)")
     }
     
-    func client(client: MSBClient!, tileDidOpen event: MSBTileEvent!) {
+    func client(_ client: MSBClient!, tileDidOpen event: MSBTileEvent!) {
         print("\(event.description)")
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
 }
 
 
-extension NSTimeInterval {
+extension TimeInterval {
     var minuteSecondMS: String {
         return String(format:"%02d:%02d:%02d", hour, minute, second)
     }
@@ -370,17 +382,17 @@ extension NSTimeInterval {
     }
 
     var hour: Int {
-        return Int(self/60.0/60.0 % 60)
+        return Int((self/60.0/60.0).truncatingRemainder(dividingBy: 60))
     }
     
     var minute: Int {
-        return Int(self/60.0 % 60)
+        return Int((self/60.0).truncatingRemainder(dividingBy: 60))
     }
     var second: Int {
-        return Int(self % 60)
+        return Int(self.truncatingRemainder(dividingBy: 60))
     }
     var millisecond: Int {
-        return Int(self*1000 % 1000 )
+        return Int((self*1000).truncatingRemainder(dividingBy: 1000) )
     }
 }
 

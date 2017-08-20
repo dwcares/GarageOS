@@ -1,0 +1,16 @@
+{
+    "event": "door-alert/door2",
+    "url": "https://api.twilio.com/2010-04-01/Accounts/",
+    "requestType": "POST",
+    "auth": {
+        "username": "",
+        "password": ""
+    },
+    "form": {
+        "From": "+",
+        "To": "+",
+        "Body": "GarageOS: Small Door has been open for five minutes!"
+    },
+    "deviceID": "",
+    "mydevices": true
+}

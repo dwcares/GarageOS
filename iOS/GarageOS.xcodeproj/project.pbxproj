@@ -20,7 +20,9 @@
 		98D7A7481C2C9B0700EE8B3E /* libSpark-SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D7A7471C2C9B0700EE8B3E /* libSpark-SDK.a */; };
 		98F04D931CC125AF00157740 /* DeepPressableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F04D921CC125AF00157740 /* DeepPressableButton.swift */; };
 		98F04D961CC1311200157740 /* MSBand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F04D951CC1311200157740 /* MSBand.swift */; };
-		F146C5CA1DB6DA1400C592DB /* MicrosoftBandKit_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F146C5C91DB6DA1400C592DB /* MicrosoftBandKit_iOS.framework */; };
+		F19F4B9C1E2D2ED7008988FA /* MicrosoftBandKit_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19F4B9B1E2D2ED7008988FA /* MicrosoftBandKit_iOS.framework */; };
+		F19F4BA01E2D308F008988FA /* WindowsAzureMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19F4B9F1E2D308F008988FA /* WindowsAzureMessaging.framework */; };
+		F1B60FB01E7430CF00D7ACD2 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F1B60FAF1E7430CF00D7ACD2 /* Settings.bundle */; };
 		F1C412381DC51F18009213AE /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C412371DC51F18009213AE /* Secrets.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,7 +37,6 @@
 		980511621C2A18F000151D89 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		980511641C2A18F000151D89 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		98A719EA1CB5D909004AB929 /* DeepPressGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepPressGestureRecognizer.swift; sourceTree = "<group>"; };
-		98C3B6391CB7FB0800B02746 /* MicrosoftBandKit_iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MicrosoftBandKit_iOS.framework; sourceTree = "<group>"; };
 		98C3B63C1CB7FB4B00B02746 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		98D46E871CBEEA9A00FC2056 /* smallIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smallIcon.png; sourceTree = "<group>"; };
 		98D46E881CBEEA9A00FC2056 /* tileIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tileIcon.png; sourceTree = "<group>"; };
@@ -43,7 +44,11 @@
 		98D7A7491C2C9C4800EE8B3E /* Swift-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Swift-Bridging-Header.h"; sourceTree = "<group>"; };
 		98F04D921CC125AF00157740 /* DeepPressableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepPressableButton.swift; sourceTree = "<group>"; };
 		98F04D951CC1311200157740 /* MSBand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSBand.swift; sourceTree = "<group>"; };
-		F146C5C91DB6DA1400C592DB /* MicrosoftBandKit_iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MicrosoftBandKit_iOS.framework; sourceTree = "<group>"; };
+		F16F00C51E2D1F1200934CDD /* GarageOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GarageOS.entitlements; sourceTree = "<group>"; };
+		F19F4B9B1E2D2ED7008988FA /* MicrosoftBandKit_iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MicrosoftBandKit_iOS.framework; sourceTree = "<group>"; };
+		F19F4B9F1E2D308F008988FA /* WindowsAzureMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMessaging.framework; sourceTree = "<group>"; };
+		F19F4BA11E2D30D4008988FA /* HubInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HubInfo.h; sourceTree = "<group>"; };
+		F1B60FAF1E7430CF00D7ACD2 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		F1C412371DC51F18009213AE /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		FCE44FB7D07726651C1AD380 /* Pods-GarageOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GarageOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GarageOS/Pods-GarageOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -54,9 +59,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				98C3B63D1CB7FB4B00B02746 /* CoreBluetooth.framework in Frameworks */,
-				F146C5CA1DB6DA1400C592DB /* MicrosoftBandKit_iOS.framework in Frameworks */,
 				98D7A7481C2C9B0700EE8B3E /* libSpark-SDK.a in Frameworks */,
 				9205E37974CB8F704317DE06 /* libPods-GarageOS.a in Frameworks */,
+				F19F4BA01E2D308F008988FA /* WindowsAzureMessaging.framework in Frameworks */,
+				F19F4B9C1E2D2ED7008988FA /* MicrosoftBandKit_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,9 +72,9 @@
 		23B2C74C2407372E003E91B0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F146C5C91DB6DA1400C592DB /* MicrosoftBandKit_iOS.framework */,
+				F19F4B9F1E2D308F008988FA /* WindowsAzureMessaging.framework */,
+				F19F4B9B1E2D2ED7008988FA /* MicrosoftBandKit_iOS.framework */,
 				98C3B63C1CB7FB4B00B02746 /* CoreBluetooth.framework */,
-				98C3B6391CB7FB0800B02746 /* MicrosoftBandKit_iOS.framework */,
 				98D7A7471C2C9B0700EE8B3E /* libSpark-SDK.a */,
 				1A5393CC041D606C95E03DF8 /* libPods-GarageOS.a */,
 			);
@@ -105,12 +111,13 @@
 		980511571C2A18F000151D89 /* GarageOS */ = {
 			isa = PBXGroup;
 			children = (
+				F16F00C51E2D1F1200934CDD /* GarageOS.entitlements */,
 				F1C412371DC51F18009213AE /* Secrets.swift */,
 				9805115A1C2A18F000151D89 /* ViewController.swift */,
+				980511581C2A18F000151D89 /* AppDelegate.swift */,
 				98F04D951CC1311200157740 /* MSBand.swift */,
 				98F04D921CC125AF00157740 /* DeepPressableButton.swift */,
 				98A719EA1CB5D909004AB929 /* DeepPressGestureRecognizer.swift */,
-				980511581C2A18F000151D89 /* AppDelegate.swift */,
 				9805115C1C2A18F000151D89 /* Main.storyboard */,
 				980511611C2A18F000151D89 /* LaunchScreen.storyboard */,
 				98D46E871CBEEA9A00FC2056 /* smallIcon.png */,
@@ -118,6 +125,8 @@
 				980511641C2A18F000151D89 /* Info.plist */,
 				98D7A7491C2C9C4800EE8B3E /* Swift-Bridging-Header.h */,
 				9805115F1C2A18F000151D89 /* Assets.xcassets */,
+				F19F4BA11E2D30D4008988FA /* HubInfo.h */,
+				F1B60FAF1E7430CF00D7ACD2 /* Settings.bundle */,
 			);
 			path = GarageOS;
 			sourceTree = "<group>";
@@ -159,9 +168,13 @@
 					980511541C2A18F000151D89 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = CZDSP7DQSH;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -195,6 +208,7 @@
 				980511601C2A18F000151D89 /* Assets.xcassets in Resources */,
 				98D46E891CBEEA9A00FC2056 /* smallIcon.png in Resources */,
 				9805115E1C2A18F000151D89 /* Main.storyboard in Resources */,
+				F1B60FB01E7430CF00D7ACD2 /* Settings.bundle in Resources */,
 				98D46E8A1CBEEA9A00FC2056 /* tileIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,11 +404,15 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GarageOS/GarageOS.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development IOS Push Services: com.therobot.garageos";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = CZDSP7DQSH;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/GarageOS",
 				);
 				INFOPLIST_FILE = GarageOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -402,10 +420,12 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = TheRobot.GarageOS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.therobot.garageos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "GarageOS/Swift-Bridging-Header.h";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "Pods/**";
 			};
@@ -417,11 +437,14 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GarageOS/GarageOS.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = CZDSP7DQSH;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/GarageOS",
 				);
 				INFOPLIST_FILE = GarageOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -429,10 +452,12 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = TheRobot.GarageOS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.therobot.garageos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "GarageOS/Swift-Bridging-Header.h";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "Pods/**";
 			};
