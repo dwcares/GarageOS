@@ -5,7 +5,7 @@
 
 target 'GarageOS' do
 
-pod "Spark-SDK"
+pod "Particle-SDK"
 pod 'HockeySDK', '~> 4.1.2'
 
 end

@@ -17,10 +17,8 @@
 		98C3B63D1CB7FB4B00B02746 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C3B63C1CB7FB4B00B02746 /* CoreBluetooth.framework */; };
 		98D46E891CBEEA9A00FC2056 /* smallIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 98D46E871CBEEA9A00FC2056 /* smallIcon.png */; };
 		98D46E8A1CBEEA9A00FC2056 /* tileIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 98D46E881CBEEA9A00FC2056 /* tileIcon.png */; };
-		98D7A7481C2C9B0700EE8B3E /* libSpark-SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D7A7471C2C9B0700EE8B3E /* libSpark-SDK.a */; };
 		98F04D931CC125AF00157740 /* DeepPressableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F04D921CC125AF00157740 /* DeepPressableButton.swift */; };
-		98F04D961CC1311200157740 /* MSBand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F04D951CC1311200157740 /* MSBand.swift */; };
-		F19F4B9C1E2D2ED7008988FA /* MicrosoftBandKit_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19F4B9B1E2D2ED7008988FA /* MicrosoftBandKit_iOS.framework */; };
+		F18DCB891FC9CB530048CD07 /* GarageClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18DCB881FC9CB520048CD07 /* GarageClient.swift */; };
 		F19F4BA01E2D308F008988FA /* WindowsAzureMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19F4B9F1E2D308F008988FA /* WindowsAzureMessaging.framework */; };
 		F1B60FB01E7430CF00D7ACD2 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F1B60FAF1E7430CF00D7ACD2 /* Settings.bundle */; };
 		F1C412381DC51F18009213AE /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C412371DC51F18009213AE /* Secrets.swift */; };
@@ -40,12 +38,10 @@
 		98C3B63C1CB7FB4B00B02746 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		98D46E871CBEEA9A00FC2056 /* smallIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smallIcon.png; sourceTree = "<group>"; };
 		98D46E881CBEEA9A00FC2056 /* tileIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tileIcon.png; sourceTree = "<group>"; };
-		98D7A7471C2C9B0700EE8B3E /* libSpark-SDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libSpark-SDK.a"; path = "Pods/../build/Debug-iphoneos/libSpark-SDK.a"; sourceTree = "<group>"; };
 		98D7A7491C2C9C4800EE8B3E /* Swift-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Swift-Bridging-Header.h"; sourceTree = "<group>"; };
 		98F04D921CC125AF00157740 /* DeepPressableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepPressableButton.swift; sourceTree = "<group>"; };
-		98F04D951CC1311200157740 /* MSBand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSBand.swift; sourceTree = "<group>"; };
 		F16F00C51E2D1F1200934CDD /* GarageOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GarageOS.entitlements; sourceTree = "<group>"; };
-		F19F4B9B1E2D2ED7008988FA /* MicrosoftBandKit_iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MicrosoftBandKit_iOS.framework; sourceTree = "<group>"; };
+		F18DCB881FC9CB520048CD07 /* GarageClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarageClient.swift; sourceTree = "<group>"; };
 		F19F4B9F1E2D308F008988FA /* WindowsAzureMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMessaging.framework; sourceTree = "<group>"; };
 		F19F4BA11E2D30D4008988FA /* HubInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HubInfo.h; sourceTree = "<group>"; };
 		F1B60FAF1E7430CF00D7ACD2 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -59,10 +55,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				98C3B63D1CB7FB4B00B02746 /* CoreBluetooth.framework in Frameworks */,
-				98D7A7481C2C9B0700EE8B3E /* libSpark-SDK.a in Frameworks */,
 				9205E37974CB8F704317DE06 /* libPods-GarageOS.a in Frameworks */,
 				F19F4BA01E2D308F008988FA /* WindowsAzureMessaging.framework in Frameworks */,
-				F19F4B9C1E2D2ED7008988FA /* MicrosoftBandKit_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,9 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				F19F4B9F1E2D308F008988FA /* WindowsAzureMessaging.framework */,
-				F19F4B9B1E2D2ED7008988FA /* MicrosoftBandKit_iOS.framework */,
 				98C3B63C1CB7FB4B00B02746 /* CoreBluetooth.framework */,
-				98D7A7471C2C9B0700EE8B3E /* libSpark-SDK.a */,
 				1A5393CC041D606C95E03DF8 /* libPods-GarageOS.a */,
 			);
 			name = Frameworks;
@@ -115,9 +107,9 @@
 				F1C412371DC51F18009213AE /* Secrets.swift */,
 				9805115A1C2A18F000151D89 /* ViewController.swift */,
 				980511581C2A18F000151D89 /* AppDelegate.swift */,
-				98F04D951CC1311200157740 /* MSBand.swift */,
 				98F04D921CC125AF00157740 /* DeepPressableButton.swift */,
 				98A719EA1CB5D909004AB929 /* DeepPressGestureRecognizer.swift */,
+				F18DCB881FC9CB520048CD07 /* GarageClient.swift */,
 				9805115C1C2A18F000151D89 /* Main.storyboard */,
 				980511611C2A18F000151D89 /* LaunchScreen.storyboard */,
 				98D46E871CBEEA9A00FC2056 /* smallIcon.png */,
@@ -172,6 +164,9 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.Keychain = {
 								enabled = 1;
 							};
 							com.apple.Push = {
@@ -282,9 +277,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9805115B1C2A18F000151D89 /* ViewController.swift in Sources */,
+				F18DCB891FC9CB530048CD07 /* GarageClient.swift in Sources */,
 				F1C412381DC51F18009213AE /* Secrets.swift in Sources */,
 				98F04D931CC125AF00157740 /* DeepPressableButton.swift in Sources */,
-				98F04D961CC1311200157740 /* MSBand.swift in Sources */,
 				98A719EB1CB5D909004AB929 /* DeepPressGestureRecognizer.swift in Sources */,
 				980511591C2A18F000151D89 /* AppDelegate.swift in Sources */,
 			);
