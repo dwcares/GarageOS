@@ -27,7 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         registerSettingsBundle()
 
         UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .alert, .sound]) { (granted, error) in
-            application.registerForRemoteNotifications()
+            if (granted) {
+                DispatchQueue.main.async { // Correct
+                    application.registerForRemoteNotifications()
+                }
+            } else {
+                print("Register for notifications error: \(error)")
+            }
         }
         
         BITHockeyManager.shared().configure(withIdentifier: "33d30f9d73cb41c8816289c0344623c9")

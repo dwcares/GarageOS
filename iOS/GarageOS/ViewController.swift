@@ -104,8 +104,11 @@ class ViewController: UIViewController, GarageClientDelegate {
             self.labelSignal.text = String(signalStrength) + "db"
             self.labelLastUpdate.text = lastUpdate
             
-            if (uptime > 0 ) {
+            if (uptime > 0) {
+                self.labelUIUptime.isHidden = false
                 self.labelUptime.text = uptime.msToSeconds.minuteSecondMS
+            } else {
+                self.labelUIUptime.isHidden = true
             }
         })
         
