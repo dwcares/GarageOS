@@ -31,8 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 DispatchQueue.main.async { // Correct
                     application.registerForRemoteNotifications()
                 }
-            } else {
-                print("Register for notifications error: \(error)")
+            } else if (error != nil) {
+                print("Register for notifications error: \(error!)")
             }
         }
         

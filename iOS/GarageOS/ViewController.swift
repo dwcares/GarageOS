@@ -26,8 +26,8 @@ class ViewController: UIViewController, GarageClientDelegate {
     @IBOutlet var labelSmallDoorDuration: UILabel!
     @IBOutlet var labelBigDoorDuration: UILabel!
     
-    var smallDoorButton: DeepPressableButton!
-    var bigDoorButton: DeepPressableButton!
+    @objc var smallDoorButton: DeepPressableButton!
+    @objc var bigDoorButton: DeepPressableButton!
     
     // Mark - Main UI Logic
     override func viewDidLoad() {
@@ -138,14 +138,14 @@ class ViewController: UIViewController, GarageClientDelegate {
     
     // MARK - Deep Press Action
     
-    func bigDoorDeepPressHandler(_ value: DeepPressGestureRecognizer)
+    @objc func bigDoorDeepPressHandler(_ value: DeepPressGestureRecognizer)
     {
         print("Deep Press: Big Door")
         GarageClient.sharedInstance.doToggleDoor(true)
         
     }
     
-    func smallDoorDeepPressHandler(_ value: DeepPressGestureRecognizer)
+    @objc func smallDoorDeepPressHandler(_ value: DeepPressGestureRecognizer)
     {
         print("Deep Press: Small Door")
         GarageClient.sharedInstance.doToggleDoor(false)
