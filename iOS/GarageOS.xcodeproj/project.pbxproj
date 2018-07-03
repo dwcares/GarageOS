@@ -18,11 +18,117 @@
 		98D46E891CBEEA9A00FC2056 /* smallIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 98D46E871CBEEA9A00FC2056 /* smallIcon.png */; };
 		98D46E8A1CBEEA9A00FC2056 /* tileIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 98D46E881CBEEA9A00FC2056 /* tileIcon.png */; };
 		98F04D931CC125AF00157740 /* DeepPressableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F04D921CC125AF00157740 /* DeepPressableButton.swift */; };
+		F1205DBE20DAC7850079B388 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C412371DC51F18009213AE /* Secrets.swift */; };
+		F1205DC020DB39180079B388 /* DoorInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1205DBF20DB39180079B388 /* DoorInterfaceController.swift */; };
 		F18DCB891FC9CB530048CD07 /* GarageClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18DCB881FC9CB520048CD07 /* GarageClient.swift */; };
 		F19F4BA01E2D308F008988FA /* WindowsAzureMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19F4B9F1E2D308F008988FA /* WindowsAzureMessaging.framework */; };
 		F1B60FB01E7430CF00D7ACD2 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F1B60FAF1E7430CF00D7ACD2 /* Settings.bundle */; };
 		F1C412381DC51F18009213AE /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C412371DC51F18009213AE /* Secrets.swift */; };
+		F1DC615320D2B0B200EAF951 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1DC615120D2B0B200EAF951 /* Interface.storyboard */; };
+		F1DC615520D2B0B300EAF951 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1DC615420D2B0B300EAF951 /* Assets.xcassets */; };
+		F1DC615C20D2B0B300EAF951 /* garageoswatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F1DC615B20D2B0B300EAF951 /* garageoswatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F1DC616120D2B0B300EAF951 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DC616020D2B0B300EAF951 /* InterfaceController.swift */; };
+		F1DC616320D2B0B300EAF951 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DC616220D2B0B300EAF951 /* ExtensionDelegate.swift */; };
+		F1DC616520D2B0B300EAF951 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DC616420D2B0B300EAF951 /* NotificationController.swift */; };
+		F1DC616720D2B0B300EAF951 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1DC616620D2B0B300EAF951 /* Assets.xcassets */; };
+		F1DC616C20D2B0B300EAF951 /* garageoswatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = F1DC614F20D2B0B200EAF951 /* garageoswatch.app */; };
+		F1DC618D20D2B10F00EAF951 /* ParticleSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1DC618820D2B0DB00EAF951 /* ParticleSwift.framework */; };
+		F1DC618E20D2B10F00EAF951 /* ParticleSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F1DC618820D2B0DB00EAF951 /* ParticleSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F1DC619320D2B13400EAF951 /* ParticleSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1DC618820D2B0DB00EAF951 /* ParticleSwift.framework */; };
+		F1DC619420D2B13400EAF951 /* ParticleSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F1DC618820D2B0DB00EAF951 /* ParticleSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F1DC615D20D2B0B300EAF951 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9805114D1C2A18EF00151D89 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1DC615A20D2B0B300EAF951;
+			remoteInfo = "garageoswatch Extension";
+		};
+		F1DC616A20D2B0B300EAF951 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9805114D1C2A18EF00151D89 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1DC614E20D2B0B200EAF951;
+			remoteInfo = garageoswatch;
+		};
+		F1DC618320D2B0DB00EAF951 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1DC617520D2B0DB00EAF951 /* ParticleSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4FA85AC41D0C88D200EC906B;
+			remoteInfo = "ParticleSwift-iOS";
+		};
+		F1DC618720D2B0DB00EAF951 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1DC617520D2B0DB00EAF951 /* ParticleSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4FA85AE01D0C890E00EC906B;
+			remoteInfo = "ParticleSwift-watchOS";
+		};
+		F1DC618F20D2B10F00EAF951 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1DC617520D2B0DB00EAF951 /* ParticleSwift.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4FA85ADF1D0C890E00EC906B;
+			remoteInfo = "ParticleSwift-watchOS";
+		};
+		F1DC619520D2B13400EAF951 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1DC617520D2B0DB00EAF951 /* ParticleSwift.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4FA85ADF1D0C890E00EC906B;
+			remoteInfo = "ParticleSwift-watchOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F1DC617220D2B0B300EAF951 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F1DC615C20D2B0B300EAF951 /* garageoswatch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1DC617420D2B0B300EAF951 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				F1DC616C20D2B0B300EAF951 /* garageoswatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1DC619220D2B10F00EAF951 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F1DC618E20D2B10F00EAF951 /* ParticleSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1DC619720D2B13400EAF951 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F1DC619420D2B13400EAF951 /* ParticleSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		016F7D87EAF9F06E035827C9 /* Pods-GarageOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GarageOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-GarageOS/Pods-GarageOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -40,12 +146,25 @@
 		98D46E881CBEEA9A00FC2056 /* tileIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tileIcon.png; sourceTree = "<group>"; };
 		98D7A7491C2C9C4800EE8B3E /* Swift-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Swift-Bridging-Header.h"; sourceTree = "<group>"; };
 		98F04D921CC125AF00157740 /* DeepPressableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepPressableButton.swift; sourceTree = "<group>"; };
+		F1205DBF20DB39180079B388 /* DoorInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoorInterfaceController.swift; sourceTree = "<group>"; };
 		F16F00C51E2D1F1200934CDD /* GarageOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GarageOS.entitlements; sourceTree = "<group>"; };
 		F18DCB881FC9CB520048CD07 /* GarageClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarageClient.swift; sourceTree = "<group>"; };
 		F19F4B9F1E2D308F008988FA /* WindowsAzureMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMessaging.framework; sourceTree = "<group>"; };
 		F19F4BA11E2D30D4008988FA /* HubInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HubInfo.h; sourceTree = "<group>"; };
 		F1B60FAF1E7430CF00D7ACD2 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		F1C412371DC51F18009213AE /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		F1DC614F20D2B0B200EAF951 /* garageoswatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = garageoswatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1DC615220D2B0B200EAF951 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		F1DC615420D2B0B300EAF951 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F1DC615620D2B0B300EAF951 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1DC615B20D2B0B300EAF951 /* garageoswatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "garageoswatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1DC616020D2B0B300EAF951 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		F1DC616220D2B0B300EAF951 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		F1DC616420D2B0B300EAF951 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		F1DC616620D2B0B300EAF951 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F1DC616820D2B0B300EAF951 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1DC616920D2B0B300EAF951 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		F1DC617520D2B0DB00EAF951 /* ParticleSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ParticleSwift.xcodeproj; path = "../../../particle-swift/Xcode/ParticleSwift.xcodeproj"; sourceTree = "<group>"; };
 		FCE44FB7D07726651C1AD380 /* Pods-GarageOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GarageOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GarageOS/Pods-GarageOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,6 +176,22 @@
 				98C3B63D1CB7FB4B00B02746 /* CoreBluetooth.framework in Frameworks */,
 				9205E37974CB8F704317DE06 /* libPods-GarageOS.a in Frameworks */,
 				F19F4BA01E2D308F008988FA /* WindowsAzureMessaging.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1DC615820D2B0B300EAF951 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1DC619320D2B13400EAF951 /* ParticleSwift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1DC619120D2B10F00EAF951 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1DC618D20D2B10F00EAF951 /* ParticleSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +221,8 @@
 			isa = PBXGroup;
 			children = (
 				980511571C2A18F000151D89 /* GarageOS */,
+				F1DC615020D2B0B200EAF951 /* garageoswatch */,
+				F1DC615F20D2B0B300EAF951 /* garageoswatch Extension */,
 				980511561C2A18F000151D89 /* Products */,
 				23B2C74C2407372E003E91B0 /* Frameworks */,
 				7C09E873AB938A6A2F3C0E0E /* Pods */,
@@ -96,6 +233,8 @@
 			isa = PBXGroup;
 			children = (
 				980511551C2A18F000151D89 /* GarageOS.app */,
+				F1DC614F20D2B0B200EAF951 /* garageoswatch.app */,
+				F1DC615B20D2B0B300EAF951 /* garageoswatch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -123,6 +262,40 @@
 			path = GarageOS;
 			sourceTree = "<group>";
 		};
+		F1DC615020D2B0B200EAF951 /* garageoswatch */ = {
+			isa = PBXGroup;
+			children = (
+				F1DC617520D2B0DB00EAF951 /* ParticleSwift.xcodeproj */,
+				F1DC615120D2B0B200EAF951 /* Interface.storyboard */,
+				F1DC615420D2B0B300EAF951 /* Assets.xcassets */,
+				F1DC615620D2B0B300EAF951 /* Info.plist */,
+			);
+			path = garageoswatch;
+			sourceTree = "<group>";
+		};
+		F1DC615F20D2B0B300EAF951 /* garageoswatch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F1DC616020D2B0B300EAF951 /* InterfaceController.swift */,
+				F1205DBF20DB39180079B388 /* DoorInterfaceController.swift */,
+				F1DC616220D2B0B300EAF951 /* ExtensionDelegate.swift */,
+				F1DC616420D2B0B300EAF951 /* NotificationController.swift */,
+				F1DC616620D2B0B300EAF951 /* Assets.xcassets */,
+				F1DC616820D2B0B300EAF951 /* Info.plist */,
+				F1DC616920D2B0B300EAF951 /* PushNotificationPayload.apns */,
+			);
+			path = "garageoswatch Extension";
+			sourceTree = "<group>";
+		};
+		F1DC617620D2B0DB00EAF951 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1DC618420D2B0DB00EAF951 /* ParticleSwift.framework */,
+				F1DC618820D2B0DB00EAF951 /* ParticleSwift.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -137,15 +310,56 @@
 				F66E52825427D2C298F8BC56 /* [CP] Embed Pods Frameworks */,
 				58A4B4BF5B347D8EEC6E54B4 /* [CP] Copy Pods Resources */,
 				F1961F251DCF70680053C2A8 /* ShellScript */,
+				F1DC617420D2B0B300EAF951 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F1DC616B20D2B0B300EAF951 /* PBXTargetDependency */,
 			);
 			name = GarageOS;
 			productName = GarageOS;
 			productReference = 980511551C2A18F000151D89 /* GarageOS.app */;
 			productType = "com.apple.product-type.application";
+		};
+		F1DC614E20D2B0B200EAF951 /* garageoswatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1DC617320D2B0B300EAF951 /* Build configuration list for PBXNativeTarget "garageoswatch" */;
+			buildPhases = (
+				F1DC614D20D2B0B200EAF951 /* Resources */,
+				F1DC617220D2B0B300EAF951 /* Embed App Extensions */,
+				F1DC619120D2B10F00EAF951 /* Frameworks */,
+				F1DC619220D2B10F00EAF951 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F1DC615E20D2B0B300EAF951 /* PBXTargetDependency */,
+				F1DC619020D2B10F00EAF951 /* PBXTargetDependency */,
+			);
+			name = garageoswatch;
+			productName = garageoswatch;
+			productReference = F1DC614F20D2B0B200EAF951 /* garageoswatch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		F1DC615A20D2B0B300EAF951 /* garageoswatch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1DC617120D2B0B300EAF951 /* Build configuration list for PBXNativeTarget "garageoswatch Extension" */;
+			buildPhases = (
+				F1DC615720D2B0B300EAF951 /* Sources */,
+				F1DC615820D2B0B300EAF951 /* Frameworks */,
+				F1DC615920D2B0B300EAF951 /* Resources */,
+				F1DC619720D2B13400EAF951 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F1DC619620D2B13400EAF951 /* PBXTargetDependency */,
+			);
+			name = "garageoswatch Extension";
+			productName = "garageoswatch Extension";
+			productReference = F1DC615B20D2B0B300EAF951 /* garageoswatch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -153,7 +367,7 @@
 		9805114D1C2A18EF00151D89 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "David Washington";
 				TargetAttributes = {
@@ -174,6 +388,16 @@
 							};
 						};
 					};
+					F1DC614E20D2B0B200EAF951 = {
+						CreatedOnToolsVersion = 9.4;
+						DevelopmentTeam = CZDSP7DQSH;
+						ProvisioningStyle = Automatic;
+					};
+					F1DC615A20D2B0B300EAF951 = {
+						CreatedOnToolsVersion = 9.4;
+						DevelopmentTeam = CZDSP7DQSH;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 980511501C2A18EF00151D89 /* Build configuration list for PBXProject "GarageOS" */;
@@ -187,12 +411,37 @@
 			mainGroup = 9805114C1C2A18EF00151D89;
 			productRefGroup = 980511561C2A18F000151D89 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = F1DC617620D2B0DB00EAF951 /* Products */;
+					ProjectRef = F1DC617520D2B0DB00EAF951 /* ParticleSwift.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				980511541C2A18F000151D89 /* GarageOS */,
+				F1DC614E20D2B0B200EAF951 /* garageoswatch */,
+				F1DC615A20D2B0B300EAF951 /* garageoswatch Extension */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		F1DC618420D2B0DB00EAF951 /* ParticleSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ParticleSwift.framework;
+			remoteRef = F1DC618320D2B0DB00EAF951 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F1DC618820D2B0DB00EAF951 /* ParticleSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ParticleSwift.framework;
+			remoteRef = F1DC618720D2B0DB00EAF951 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		980511531C2A18F000151D89 /* Resources */ = {
@@ -205,6 +454,23 @@
 				9805115E1C2A18F000151D89 /* Main.storyboard in Resources */,
 				F1B60FB01E7430CF00D7ACD2 /* Settings.bundle in Resources */,
 				98D46E8A1CBEEA9A00FC2056 /* tileIcon.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1DC614D20D2B0B200EAF951 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1DC615520D2B0B300EAF951 /* Assets.xcassets in Resources */,
+				F1DC615320D2B0B200EAF951 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1DC615920D2B0B300EAF951 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1DC616720D2B0B300EAF951 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,7 +551,42 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F1DC615720D2B0B300EAF951 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1205DC020DB39180079B388 /* DoorInterfaceController.swift in Sources */,
+				F1DC616520D2B0B300EAF951 /* NotificationController.swift in Sources */,
+				F1205DBE20DAC7850079B388 /* Secrets.swift in Sources */,
+				F1DC616320D2B0B300EAF951 /* ExtensionDelegate.swift in Sources */,
+				F1DC616120D2B0B300EAF951 /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F1DC615E20D2B0B300EAF951 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F1DC615A20D2B0B300EAF951 /* garageoswatch Extension */;
+			targetProxy = F1DC615D20D2B0B300EAF951 /* PBXContainerItemProxy */;
+		};
+		F1DC616B20D2B0B300EAF951 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F1DC614E20D2B0B200EAF951 /* garageoswatch */;
+			targetProxy = F1DC616A20D2B0B300EAF951 /* PBXContainerItemProxy */;
+		};
+		F1DC619020D2B10F00EAF951 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ParticleSwift-watchOS";
+			targetProxy = F1DC618F20D2B10F00EAF951 /* PBXContainerItemProxy */;
+		};
+		F1DC619620D2B13400EAF951 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ParticleSwift-watchOS";
+			targetProxy = F1DC619520D2B13400EAF951 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		9805115C1C2A18F000151D89 /* Main.storyboard */ = {
@@ -302,6 +603,14 @@
 				980511621C2A18F000151D89 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		F1DC615120D2B0B200EAF951 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1DC615220D2B0B200EAF951 /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -476,6 +785,117 @@
 			};
 			name = Release;
 		};
+		F1DC616D20D2B0B300EAF951 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CZDSP7DQSH;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				IBSC_MODULE = garageoswatch_Extension;
+				INFOPLIST_FILE = garageoswatch/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.therobot.garageos.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.3;
+			};
+			name = Debug;
+		};
+		F1DC616E20D2B0B300EAF951 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CZDSP7DQSH;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				IBSC_MODULE = garageoswatch_Extension;
+				INFOPLIST_FILE = garageoswatch/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.therobot.garageos.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.3;
+			};
+			name = Release;
+		};
+		F1DC616F20D2B0B300EAF951 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CZDSP7DQSH;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "garageoswatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.therobot.garageos.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.3;
+			};
+			name = Debug;
+		};
+		F1DC617020D2B0B300EAF951 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CZDSP7DQSH;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "garageoswatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.therobot.garageos.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.3;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -493,6 +913,24 @@
 			buildConfigurations = (
 				980511681C2A18F000151D89 /* Debug */,
 				980511691C2A18F000151D89 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1DC617120D2B0B300EAF951 /* Build configuration list for PBXNativeTarget "garageoswatch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1DC616F20D2B0B300EAF951 /* Debug */,
+				F1DC617020D2B0B300EAF951 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1DC617320D2B0B300EAF951 /* Build configuration list for PBXNativeTarget "garageoswatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1DC616D20D2B0B300EAF951 /* Debug */,
+				F1DC616E20D2B0B300EAF951 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
