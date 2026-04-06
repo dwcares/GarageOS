@@ -1,12 +1,26 @@
-# Uncomment this line to define a global platform for your project
-# platform :ios, '8.0'
-# Uncomment this line if you're using Swift
-# use_frameworks!
+platform :ios, '16.0'
+use_frameworks!
 
 target 'GarageOS' do
 
-pod "Particle-SDK"
-pod 'HockeySDK', '~> 4.1.2'
+pod "Particle-SDK", "~> 1.0"
 
 end
 
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '16.0'
+    end
+  end
+
+  # Fix AFNetworking private header issue with modern SDKs
+  # netinet6/in6.h is now private; netinet/in.h already provides what's needed
+  Dir.glob('Pods/AFNetworking/**/*.m').each do |file|
+    content = File.read(file)
+    if content.include?('#import <netinet6/in6.h>')
+      content.gsub!('#import <netinet6/in6.h>', '// #import <netinet6/in6.h> // Removed: private header in modern SDKs')
+      File.write(file, content)
+    end
+  end
+end

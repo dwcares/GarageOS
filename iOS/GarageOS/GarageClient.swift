@@ -8,67 +8,72 @@
 
 import Foundation
 
-protocol GarageClientDelegate: class {
-    
-    func doorStatusUpdated(_ doorStatus:Bool, isDoor1: Bool)
-    func carDistanceInfoUpdated(_ carDistance:Int, isCar1:Bool)
-    func statusInfoUpdated(_ signalStrength:Int, lastUpdate:String, uptime: Int)
-    func doorDurationInfoUpdated(_ smallDoorDuration:Int, bigDoorDuration:Int)
+protocol GarageClientDelegate: AnyObject {
+
+    func doorStatusUpdated(_ doorStatus: Bool, isDoor1: Bool)
+    func carDistanceInfoUpdated(_ carDistance: Int, isCar1: Bool)
+    func statusInfoUpdated(_ signalStrength: Int, lastUpdate: String, uptime: Int)
+    func doorDurationInfoUpdated(_ smallDoorDuration: Int, bigDoorDuration: Int)
 
 }
 
 class GarageClient: NSObject {
-    
+
     static let sharedInstance = GarageClient()
-    
-    public static let CAR_STATUS_NOTPARKED = 0;
-    public static let CAR_STATUS_PARKED = 1;
-    public static let CAR_STATUS_PARKEDCLOSE = 2;
-    public static let CAR_STATUS_INVALID = -1;
-    
+
+    public static let CAR_STATUS_NOTPARKED = 0
+    public static let CAR_STATUS_PARKED = 1
+    public static let CAR_STATUS_PARKEDCLOSE = 2
+    public static let CAR_STATUS_INVALID = -1
+
     public static let CAR1_MAXDISTANCE = 60
     public static let CAR2_MAXDISTANCE = 60
-    
+
     public static let CAR1_MINDISTANCE = 40
     public static let CAR2_MINDISTANCE = 40
-    
-    var delegate : GarageClientDelegate!
-    var myPhoton : ParticleDevice!
-    
+
+    weak var delegate: GarageClientDelegate?
+    var myPhoton: ParticleDevice?
+    var smallDoorOpen: Bool = false
+    var bigDoorOpen: Bool = false
+
+    // Callback for watch status updates
+    var onDoorStatusChanged: (() -> Void)?
+
     override init() {
         super.init()
-        
-        doParticleLogin(){_ in }
+
+        doParticleLogin { _ in }
 
     }
-    
-    
+
+
     func doParticleLogin(_ completion: @escaping (_ result: Bool) -> Void) {
-        ParticleCloud.sharedInstance().login(withUser: Secrets.particleUser, password: Secrets.particlePassword) { (error:Error?) -> Void in
-            if let _=error {
+        ParticleCloud.sharedInstance().login(withUser: Secrets.particleUser, password: Secrets.particlePassword) { (error: Error?) -> Void in
+            if let _ = error {
                 print("Wrong credentials or no internet connectivity, please try again")
                 completion(false)
             }
             else {
                 print("Logged in")
-                
+
                 self.getDevice(Secrets.particleDeviceID) {
                     (device: ParticleDevice?) in
-                    
+
                     self.myPhoton = device
                     self.subscribeToEvents()
-                    
+
                     self.getInitialState()
-                    
-                    completion(true);
-                    
+
+                    completion(true)
+
                 }
             }
         }
     }
-    
+
     func getDevice(_ id: String, completion: @escaping (_ result: ParticleDevice?) -> Void) {
-        ParticleCloud.sharedInstance().getDevice(id, completion: { (device:ParticleDevice?, error:Error?) -> Void in
+        ParticleCloud.sharedInstance().getDevice(id, completion: { (device: ParticleDevice?, error: Error?) -> Void in
             if let _ = device {
                 completion(device)
             } else {
@@ -76,112 +81,152 @@ class GarageClient: NSObject {
             }
         })
     }
-    
 
-    
-    func getInitialState() {        
-        if (self.myPhoton == nil) { return; }
-        
-        self.myPhoton.getVariable("door1Status", completion: {
-            (result: Any?, error:Error?) -> Void in
+
+
+    func getInitialState() {
+        guard let myPhoton = self.myPhoton else { return }
+
+        myPhoton.getVariable("door1Status", completion: {
+            (result: Any?, error: Error?) -> Void in
             if error != nil {
                 print("Failed getting initial door 1 state")
             }
             else {
-                self.delegate.doorStatusUpdated(result as! Bool, isDoor1: true)
+                if let status = result as? Bool {
+                    self.smallDoorOpen = status
+                    self.delegate?.doorStatusUpdated(status, isDoor1: true)
+                    self.onDoorStatusChanged?()
+                }
             }
         })
-        
-        self.myPhoton.getVariable("door2Status", completion: {
-            (result: Any?, error:Error?) -> Void in
+
+        myPhoton.getVariable("door2Status", completion: {
+            (result: Any?, error: Error?) -> Void in
             if error != nil {
                 print("Failed getting initial door 2 state")
             }
             else {
-                self.delegate.doorStatusUpdated(result as! Bool, isDoor1: false)
+                if let status = result as? Bool {
+                    self.bigDoorOpen = status
+                    self.delegate?.doorStatusUpdated(status, isDoor1: false)
+                    self.onDoorStatusChanged?()
+                }
             }
         })
-        
-        self.myPhoton.getVariable("car1Distance", completion: {
-            (result: Any?, error:Error?) -> Void in
+
+        myPhoton.getVariable("car1Distance", completion: {
+            (result: Any?, error: Error?) -> Void in
             if error != nil {
                 print("Failed getting car 1 distance")
             }
             else {
-                self.delegate.carDistanceInfoUpdated(result as! Int, isCar1: true)
+                if let distance = result as? Int {
+                    self.delegate?.carDistanceInfoUpdated(distance, isCar1: true)
+                }
             }
         })
-        
-        self.myPhoton.getVariable("wifiStrength", completion: {
-            (result: Any?, error:Error?) -> Void in
+
+        myPhoton.getVariable("wifiStrength", completion: {
+            (result: Any?, error: Error?) -> Void in
             if error != nil {
-                print("Failed getting car 1 distance")
+                print("Failed getting wifi strength")
             }
             else {
-                self.delegate.statusInfoUpdated(result as! Int,
-                                      lastUpdate: self.getTimeStamp(),
-                                      uptime: 0)
+                if let strength = result as? Int {
+                    self.delegate?.statusInfoUpdated(strength,
+                                          lastUpdate: self.getTimeStamp(),
+                                          uptime: 0)
+                }
             }
         })
     }
-    
+
     func subscribeToEvents() {
-        
+
         ParticleCloud.sharedInstance().subscribeToDeviceEvents(withPrefix: "heartbeat", deviceID: Secrets.particleDeviceID, handler: { (event, error) in
             guard error == nil else { NSLog("Error subscribing to 'heartbeat' event: \(error!)"); return }
-            
-            print("'heartbeat' event received: \(event!)")
-            self.onHeartbeat((event?.data)!)
+
+            print("'heartbeat' event received: \(String(describing: event))")
+            if let data = event?.data {
+                self.onHeartbeat(data)
+            }
         })
-        
+
         ParticleCloud.sharedInstance().subscribeToDeviceEvents(withPrefix: "door-status-change", deviceID: Secrets.particleDeviceID, handler: { (event, error) in
             guard error == nil else { NSLog("Error subscribing to 'door-status-change' event: \(error!)"); return }
-            
-            print("'door-status-change' event received: \(event!)")
-            
-            self.delegate.doorStatusUpdated((event?.data?.contains("1"))!, isDoor1: (event?.event.contains("door2"))!)
+
+            print("'door-status-change' event received: \(String(describing: event))")
+
+            if let data = event?.data, let eventName = event?.event {
+                let isOpen = data.contains("1")
+                let isDoor1 = eventName.contains("door2")
+                // isDoor1=true means small door in the delegate/UI convention
+                if isDoor1 {
+                    self.smallDoorOpen = isOpen
+                } else {
+                    self.bigDoorOpen = isOpen
+                }
+                self.delegate?.doorStatusUpdated(isOpen, isDoor1: isDoor1)
+                self.onDoorStatusChanged?()
+            }
         })
     }
-    
+
     func onHeartbeat(_ data: String) {
-        
+
         do {
-            let json = try JSONSerialization.jsonObject(with: data.data(using: String.Encoding.ascii)!, options: .allowFragments) as! [String:AnyObject]
-            
-            print(json);
-            
-            
-            self.delegate.carDistanceInfoUpdated(json["car1Distance"] as! Int, isCar1: true)
-            self.delegate.doorStatusUpdated(json["door1Status"] as! Bool, isDoor1: true)
-            self.delegate.doorStatusUpdated(json["door2Status"] as! Bool, isDoor1: false)
-            self.delegate.statusInfoUpdated(json["wifiStrength"] as! Int,
-                                            lastUpdate: self.getTimeStamp(),
-                                            uptime: Int(json["uptime"] as! String)!)
-            
-            self.delegate.doorDurationInfoUpdated(json["door1OpenDuration"] as! Int, bigDoorDuration: json["door2OpenDuration"] as! Int)
-            
-            
+            guard let jsonData = data.data(using: .ascii) else { return }
+            let json = try JSONSerialization.jsonObject(with: jsonData, options: .fragmentsAllowed) as? [String: Any] ?? [:]
+
+            print(json)
+
+            if let carDistance = json["car1Distance"] as? Int {
+                self.delegate?.carDistanceInfoUpdated(carDistance, isCar1: true)
+            }
+            if let door1Status = json["door1Status"] as? Bool {
+                self.smallDoorOpen = door1Status
+                self.delegate?.doorStatusUpdated(door1Status, isDoor1: true)
+                self.onDoorStatusChanged?()
+            }
+            if let door2Status = json["door2Status"] as? Bool {
+                self.bigDoorOpen = door2Status
+                self.delegate?.doorStatusUpdated(door2Status, isDoor1: false)
+                self.onDoorStatusChanged?()
+            }
+            if let wifiStrength = json["wifiStrength"] as? Int {
+                let uptime = (json["uptime"] as? String).flatMap { Int($0) } ?? 0
+                self.delegate?.statusInfoUpdated(wifiStrength,
+                                                lastUpdate: self.getTimeStamp(),
+                                                uptime: uptime)
+            }
+
+            if let door1Duration = json["door1OpenDuration"] as? Int,
+               let door2Duration = json["door2OpenDuration"] as? Int {
+                self.delegate?.doorDurationInfoUpdated(door1Duration, bigDoorDuration: door2Duration)
+            }
+
+
         } catch {
             print("error serializing JSON: \(error)")
         }
     }
-    
-    func doToggleDoor(_ isDoor1:Bool) {
+
+    func doToggleDoor(_ isDoor1: Bool) {
         let doorNumber = isDoor1 ? "r2" : "r1"
         let funcArgs = [doorNumber]
-        
-        myPhoton.callFunction("toggleDoor", withArguments: funcArgs) { (resultCode : NSNumber?, error : Error?) -> Void in
+
+        myPhoton?.callFunction("toggleDoor", withArguments: funcArgs) { (resultCode: NSNumber?, error: Error?) -> Void in
             if (error == nil) {
                 print("The door is opening")
-                
+
             }
         }
     }
-    
+
     func getTimeStamp() -> String {
         return DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .medium)
     }
-    
-    
+
+
 }
-    

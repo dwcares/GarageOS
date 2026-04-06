@@ -26,8 +26,8 @@ class ViewController: UIViewController, GarageClientDelegate {
     @IBOutlet var labelSmallDoorDuration: UILabel!
     @IBOutlet var labelBigDoorDuration: UILabel!
     
-    @objc var smallDoorButton: DeepPressableButton!
-    @objc var bigDoorButton: DeepPressableButton!
+    @IBOutlet var smallDoorButton: DeepPressableButton!
+    @IBOutlet var bigDoorButton: DeepPressableButton!
     
     // Mark - Main UI Logic
     override func viewDidLoad() {

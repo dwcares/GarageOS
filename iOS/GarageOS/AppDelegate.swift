@@ -8,106 +8,191 @@
 
 import UIKit
 import UserNotifications
+import WatchConnectivity
 
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    
+@main
+class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
+
     var window: UIWindow?
-    
-    var deviceToken:Data?
-    var notificationHub:SBNotificationHub?
+
     var launchedShortcutItem: UIApplicationShortcutItem?
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        if let shortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
             launchedShortcutItem = shortcutItem
         }
-        
+
         registerSettingsBundle()
+
+        // Set up WatchConnectivity
+        if WCSession.isSupported() {
+            let session = WCSession.default
+            session.delegate = self
+            session.activate()
+        }
+
+        // Send door status to watch whenever it changes
+        GarageClient.sharedInstance.onDoorStatusChanged = { [weak self] in
+            self?.sendDoorStatusToWatch()
+        }
 
         UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .alert, .sound]) { (granted, error) in
             if (granted) {
-                DispatchQueue.main.async { // Correct
+                DispatchQueue.main.async {
                     application.registerForRemoteNotifications()
                 }
-            } else if (error != nil) {
-                print("Register for notifications error: \(error!)")
+            } else if let error = error {
+                print("Register for notifications error: \(error)")
             }
         }
-        
-        BITHockeyManager.shared().configure(withIdentifier: "33d30f9d73cb41c8816289c0344623c9")
-        BITHockeyManager.shared().start()
-        BITHockeyManager.shared().authenticator.authenticateInstallation()
-        
+
         return true
-        
+
     }
 
-    
-    
+
+
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("Failed to register with error: \(error)");
+        print("Failed to register with error: \(error)")
     }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        self.notificationHub = SBNotificationHub(connectionString: Secrets.AzureNotificationHubConnection, notificationHubPath:Secrets.AzureNotificationHubPath)
-        self.deviceToken = deviceToken
-        
         print("Device Token: \(deviceToken)")
-
-        registerNotificationTags()
     }
-    
+
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         let handledShortCutItem = handleShortCutItem(shortcutItem)
-        
+
         completionHandler(handledShortCutItem)
     }
-    
-    
+
+
     func registerSettingsBundle() {
-        let appDefaults = [String:AnyObject]()
+        let appDefaults = [String: AnyObject]()
         UserDefaults.standard.register(defaults: appDefaults)
- 
-    }
-    
-    func registerNotificationTags() {
-        var tags = Set<String>()
-        
-        if (UserDefaults.standard.bool(forKey: "settingsDoorAlert")) { tags.insert("doorAlert") }
-        if (UserDefaults.standard.bool(forKey: "settingsDoorStatus")) { tags.insert("doorStatus") }
-        
-        self.notificationHub?.registerNative(withDeviceToken: deviceToken, tags:tags, completion: { (error) in
-            if (error != nil) {
-                print("Error registering for notification: \(error!)")
-            }
-        })
-        
+
     }
 
-    
     func handleShortCutItem(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
         var handled = false
-        
-        guard let shortCutType = shortcutItem.type as String? else { return false }
-        
+
+        let shortCutType = shortcutItem.type
+
         switch (shortCutType) {
         case "com.TheRobot.GarageOS.Door1":
             GarageClient.sharedInstance.doToggleDoor(true)
             handled = true
-            break
         case "com.TheRobot.GarageOS.Door2":
             GarageClient.sharedInstance.doToggleDoor(false)
             handled = true
-            break
         default:
             break
         }
-        
+
         return handled
     }
-    
-    
+
+    // MARK: - WCSessionDelegate
+
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        print("WCSession activation: \(activationState.rawValue)")
+        // Push current status to watch on activation
+        if activationState == .activated {
+            sendDoorStatusToWatch()
+        }
+    }
+
+    func sessionDidBecomeInactive(_ session: WCSession) {
+    }
+
+    func sessionDidDeactivate(_ session: WCSession) {
+        WCSession.default.activate()
+    }
+
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        guard let action = message["action"] as? String else { return }
+        print("WC received message: \(message)")
+
+        switch action {
+        case "toggleDoor":
+            guard let door = message["door"] as? String else { return }
+            let isDoor1 = (door == "big")
+            print("Watch requested toggle: \(door) door")
+            GarageClient.sharedInstance.doToggleDoor(isDoor1)
+
+        case "requestStatus":
+            sendDoorStatusToWatch()
+
+        default:
+            break
+        }
+    }
+
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+        guard let action = message["action"] as? String else {
+            replyHandler(["error": "no action"])
+            return
+        }
+        print("WC received message with reply: \(message)")
+
+        switch action {
+        case "toggleDoor":
+            guard let door = message["door"] as? String else {
+                replyHandler(["error": "no door"])
+                return
+            }
+            let isDoor1 = (door == "big")
+            print("Watch requested toggle: \(door) door")
+            GarageClient.sharedInstance.doToggleDoor(isDoor1)
+            replyHandler(["toggled": door])
+
+        case "requestStatus":
+            let status: [String: Any] = [
+                "action": "doorStatus",
+                "smallDoorOpen": GarageClient.sharedInstance.smallDoorOpen,
+                "bigDoorOpen": GarageClient.sharedInstance.bigDoorOpen
+            ]
+            replyHandler(status)
+
+        default:
+            replyHandler(["error": "unknown action"])
+        }
+    }
+
+    func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any] = [:]) {
+        guard userInfo["action"] as? String == "toggleDoor",
+              let door = userInfo["door"] as? String else { return }
+
+        let isDoor1 = (door == "big")
+        print("Watch requested toggle (via userInfo): \(door) door")
+        GarageClient.sharedInstance.doToggleDoor(isDoor1)
+    }
+
+    // MARK: - Watch Status Updates
+
+    func sendDoorStatusToWatch() {
+        guard WCSession.default.activationState == .activated else { return }
+
+        let status: [String: Any] = [
+            "action": "doorStatus",
+            "smallDoorOpen": GarageClient.sharedInstance.smallDoorOpen,
+            "bigDoorOpen": GarageClient.sharedInstance.bigDoorOpen
+        ]
+
+        print("Sending door status to watch: \(status)")
+
+        // Always update application context (persists, available on watch launch)
+        try? WCSession.default.updateApplicationContext(status)
+
+        // Also send live message if watch is reachable
+        if WCSession.default.isReachable {
+            WCSession.default.sendMessage(status, replyHandler: nil) { error in
+                print("Failed sending status to watch: \(error.localizedDescription)")
+            }
+        }
+    }
+
+
 }
 

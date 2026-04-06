@@ -17,50 +17,50 @@ class DeepPressGestureRecognizer: UIGestureRecognizer
     var vibrateOnDeepPress = true
     let threshold: CGFloat
     let use3DTouch: Bool
-    
+
     fileprivate var deepPressed: Bool = false
-    
+
     required init(target: AnyObject?, action: Selector, threshold: CGFloat, use3DTouch: Bool)
     {
         self.threshold = threshold
         self.use3DTouch = use3DTouch
-        
+
         super.init(target: target, action: action)
     }
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent)
     {
         if let touch = touches.first
         {
             handleTouch(touch)
         }
-        
+
         super.touchesBegan(touches, with: event)
 
     }
-    
+
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent)
     {
         if let touch = touches.first
         {
             handleTouch(touch)
         }
-        
+
         super.touchesMoved(touches, with: event)
 
     }
-    
+
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent)
     {
-        
-        state = deepPressed || !use3DTouch ? UIGestureRecognizerState.ended : UIGestureRecognizerState.failed
-        
+
+        state = deepPressed || !use3DTouch ? UIGestureRecognizer.State.ended : UIGestureRecognizer.State.failed
+
         deepPressed = false
-        
+
         super.touchesEnded(touches, with: event)
 
     }
-    
+
     fileprivate func handleTouch(_ touch: UITouch)
     {
         guard let _ = view, touch.force != 0 && touch.maximumPossibleForce != 0 else
@@ -74,17 +74,17 @@ class DeepPressGestureRecognizer: UIGestureRecognizer
             {
                 AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
             }
-            
+
             deepPressed = true
         }
         else if deepPressed && (touch.force / touch.maximumPossibleForce) < threshold
         {
-            state = UIGestureRecognizerState.ended
-            
+            state = UIGestureRecognizer.State.ended
+
             deepPressed = false
         }
     }
-    
+
 
 }
 
@@ -93,10 +93,10 @@ class DeepPressGestureRecognizer: UIGestureRecognizer
 protocol DeepPressable
 {
     var gestureRecognizers: [UIGestureRecognizer]? {get set}
-    
+
     func addGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer)
     func removeGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer)
-    
+
     func setDeepPressAction(_ target: AnyObject, action: Selector, use3DTouch: Bool)
     func removeDeepPressAction()
 }
@@ -106,17 +106,17 @@ extension DeepPressable
     func setDeepPressAction(_ target: AnyObject, action: Selector, use3DTouch: Bool)
     {
         let deepPressGestureRecognizer = DeepPressGestureRecognizer(target: target, action: action, threshold: 1, use3DTouch: use3DTouch)
-        
+
         self.addGestureRecognizer(deepPressGestureRecognizer)
     }
-    
+
     func removeDeepPressAction()
     {
         guard let gestureRecognizers = gestureRecognizers else
         {
             return
         }
-        
+
         for recogniser in gestureRecognizers where recogniser is DeepPressGestureRecognizer
         {
             removeGestureRecognizer(recogniser)
