@@ -26,16 +26,19 @@ class ViewController: UIViewController, GarageClientDelegate {
     @IBOutlet var labelSmallDoorDuration: UILabel!
     @IBOutlet var labelBigDoorDuration: UILabel!
     
-    @IBOutlet var smallDoorButton: DeepPressableButton!
-    @IBOutlet var bigDoorButton: DeepPressableButton!
-    
+    @IBOutlet var smallDoorButton: UIButton!
+    @IBOutlet var bigDoorButton: UIButton!
+
+    private let haptic = UINotificationFeedbackGenerator()
+
     // Mark - Main UI Logic
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        initDeepPressButtons()
+
+        initDoorButtons()
+        haptic.prepare()
         GarageClient.sharedInstance.delegate = self
-        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,10 +66,8 @@ class ViewController: UIViewController, GarageClientDelegate {
             if (self.smallDoorStatus == nil) { return };
             
             if (isDoor1) {
-                print("Door 1: \(doorStatus)")
                 self.smallDoorStatus.alpha = doorStatus ? 1 : 0.3
             } else {
-                print("Door 2: \(doorStatus)")
                 self.bigDoorStatus.alpha = doorStatus ? 1 : 0.3
             }
             
@@ -86,17 +87,15 @@ class ViewController: UIViewController, GarageClientDelegate {
             } else {
                 
                 self.labelCar1Distance.text = String(carDistance) + "\""
-                
+
                 let boundedProgress = min(max(carDistance,GarageClient.CAR1_MINDISTANCE), GarageClient.CAR1_MAXDISTANCE)
                 self.progressCar1Distance.progress = 1 - Float(boundedProgress - GarageClient.CAR1_MINDISTANCE) /
                     Float(GarageClient.CAR1_MAXDISTANCE - GarageClient.CAR1_MINDISTANCE)
             }
-            
-            print("Car 1: \(carDistance) inches")
-            
+
         })
     }
-    
+
     func statusInfoUpdated(_ signalStrength:Int, lastUpdate:String, uptime: Int) {
         DispatchQueue.main.async(execute: {
             if (self.smallDoorStatus == nil) { return };
@@ -175,27 +174,34 @@ class ViewController: UIViewController, GarageClientDelegate {
         
     }
     
-    // MARK - Deep Press Action
-    
-    @objc func bigDoorDeepPressHandler(_ value: DeepPressGestureRecognizer)
+    // MARK - Door Actions
+
+    @objc func bigDoorLongPressHandler(_ gesture: UILongPressGestureRecognizer)
     {
-        print("Deep Press: Big Door")
-        GarageClient.sharedInstance.doToggleDoor(true)
-        
+        if gesture.state == .began {
+            haptic.notificationOccurred(.success)
+            haptic.prepare()
+            GarageClient.sharedInstance.doToggleDoor(true)
+        }
     }
-    
-    @objc func smallDoorDeepPressHandler(_ value: DeepPressGestureRecognizer)
+
+    @objc func smallDoorLongPressHandler(_ gesture: UILongPressGestureRecognizer)
     {
-        print("Deep Press: Small Door")
-        GarageClient.sharedInstance.doToggleDoor(false)
-        
+        if gesture.state == .began {
+            haptic.notificationOccurred(.success)
+            haptic.prepare()
+            GarageClient.sharedInstance.doToggleDoor(false)
+        }
     }
-    
-    func initDeepPressButtons() {
-        let is3DTouchAvailiable = self.traitCollection.forceTouchCapability == UIForceTouchCapability.available
-        
-        smallDoorButton.setDeepPressAction(self, action: #selector(self.smallDoorDeepPressHandler(_:)), use3DTouch:is3DTouchAvailiable)
-        bigDoorButton.setDeepPressAction(self, action: #selector(self.bigDoorDeepPressHandler(_:)), use3DTouch:is3DTouchAvailiable)
+
+    func initDoorButtons() {
+        let smallPress = UILongPressGestureRecognizer(target: self, action: #selector(smallDoorLongPressHandler(_:)))
+        smallPress.minimumPressDuration = 0.5
+        smallDoorButton.addGestureRecognizer(smallPress)
+
+        let bigPress = UILongPressGestureRecognizer(target: self, action: #selector(bigDoorLongPressHandler(_:)))
+        bigPress.minimumPressDuration = 0.5
+        bigDoorButton.addGestureRecognizer(bigPress)
     }
 
     

@@ -13,11 +13,9 @@
 		9805115E1C2A18F000151D89 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9805115C1C2A18F000151D89 /* Main.storyboard */; };
 		980511601C2A18F000151D89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9805115F1C2A18F000151D89 /* Assets.xcassets */; };
 		980511631C2A18F000151D89 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 980511611C2A18F000151D89 /* LaunchScreen.storyboard */; };
-		98A719EB1CB5D909004AB929 /* DeepPressGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A719EA1CB5D909004AB929 /* DeepPressGestureRecognizer.swift */; };
 		98C3B63D1CB7FB4B00B02746 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C3B63C1CB7FB4B00B02746 /* CoreBluetooth.framework */; };
 		98D46E891CBEEA9A00FC2056 /* smallIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 98D46E871CBEEA9A00FC2056 /* smallIcon.png */; };
 		98D46E8A1CBEEA9A00FC2056 /* tileIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 98D46E881CBEEA9A00FC2056 /* tileIcon.png */; };
-		98F04D931CC125AF00157740 /* DeepPressableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F04D921CC125AF00157740 /* DeepPressableButton.swift */; };
 		F18DCB891FC9CB530048CD07 /* GarageClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18DCB881FC9CB520048CD07 /* GarageClient.swift */; };
 		F1B60FB01E7430CF00D7ACD2 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F1B60FAF1E7430CF00D7ACD2 /* Settings.bundle */; };
 		F1C412381DC51F18009213AE /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C412371DC51F18009213AE /* Secrets.swift */; };
@@ -64,12 +62,10 @@
 		9805115F1C2A18F000151D89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		980511621C2A18F000151D89 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		980511641C2A18F000151D89 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		98A719EA1CB5D909004AB929 /* DeepPressGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepPressGestureRecognizer.swift; sourceTree = "<group>"; };
 		98C3B63C1CB7FB4B00B02746 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		98D46E871CBEEA9A00FC2056 /* smallIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smallIcon.png; sourceTree = "<group>"; };
 		98D46E881CBEEA9A00FC2056 /* tileIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tileIcon.png; sourceTree = "<group>"; };
 		98D7A7491C2C9C4800EE8B3E /* Swift-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Swift-Bridging-Header.h"; sourceTree = "<group>"; };
-		98F04D921CC125AF00157740 /* DeepPressableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepPressableButton.swift; sourceTree = "<group>"; };
 		F16F00C51E2D1F1200934CDD /* GarageOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GarageOS.entitlements; sourceTree = "<group>"; };
 		F18DCB881FC9CB520048CD07 /* GarageClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarageClient.swift; sourceTree = "<group>"; };
 		F19F4B9F1E2D308F008988FA /* WindowsAzureMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMessaging.framework; sourceTree = "<group>"; };
@@ -151,8 +147,6 @@
 				F1C412371DC51F18009213AE /* Secrets.swift */,
 				9805115A1C2A18F000151D89 /* ViewController.swift */,
 				980511581C2A18F000151D89 /* AppDelegate.swift */,
-				98F04D921CC125AF00157740 /* DeepPressableButton.swift */,
-				98A719EA1CB5D909004AB929 /* DeepPressGestureRecognizer.swift */,
 				F18DCB881FC9CB520048CD07 /* GarageClient.swift */,
 				9805115C1C2A18F000151D89 /* Main.storyboard */,
 				980511611C2A18F000151D89 /* LaunchScreen.storyboard */,
@@ -357,8 +351,6 @@
 				9805115B1C2A18F000151D89 /* ViewController.swift in Sources */,
 				F18DCB891FC9CB530048CD07 /* GarageClient.swift in Sources */,
 				F1C412381DC51F18009213AE /* Secrets.swift in Sources */,
-				98F04D931CC125AF00157740 /* DeepPressableButton.swift in Sources */,
-				98A719EB1CB5D909004AB929 /* DeepPressGestureRecognizer.swift in Sources */,
 				980511591C2A18F000151D89 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
