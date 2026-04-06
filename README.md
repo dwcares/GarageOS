@@ -80,4 +80,135 @@ Now that the hardware is built and in place, now it's just a matter of writing t
 ### Wiring Diagram
 ![Wiring diagram](images/garageos-fritzing.png)
 
+## The Firmware
+
+The Particle Photon runs a continuous loop that monitors sensors and publishes state to the Particle Cloud.
+
+### Pin assignments
+
+| Pin | Function |
+|-----|----------|
+| D0 | Small door relay |
+| D1 | Big door relay |
+| A0 | Small door magnetic reed switch |
+| A1 | Big door magnetic reed switch |
+| A2 | Parking LED (Yellow) |
+| A3 | Parking LED (Magenta) |
+| A4 | Parking LED (Cyan) |
+| D6 | Ultrasonic sensor trigger |
+| D7 | Ultrasonic sensor echo |
+
+### Cloud variables
+
+| Variable | Type | Description |
+|----------|------|-------------|
+| `door1Status` | int | Small door: 0 = closed, 1 = open |
+| `door2Status` | int | Big door: 0 = closed, 1 = open |
+| `car1Distance` | int | Parking distance in inches |
+| `car1Status` | int | 0 = not parked, 1 = parked, 2 = too close |
+| `wifiStrength` | int | WiFi RSSI in dBm |
+
+### Cloud functions
+
+| Function | Argument | Description |
+|----------|----------|-------------|
+| `toggleDoor` | `r1` or `r2` | Pulses relay for 500ms to toggle the door |
+
+### Sensor smoothing
+
+Both door sensors and the parking sensor use statistical smoothing (100-sample windows) to filter noise. The parking sensor also uses standard deviation to reject outlier readings.
+
+### Heartbeat
+
+The firmware publishes a JSON heartbeat event every 60 seconds (or immediately on state change). This includes all sensor values, door open durations, and uptime. The iOS and watchOS apps subscribe to these events for real-time updates.
+
+### SMS alerts
+
+A Particle webhook (`firmware/webhook.json`) can be configured with Twilio credentials to send SMS alerts when a door has been open for too long.
+
 ## The Software Build
+
+### iOS App
+
+The iPhone app connects to the Particle Cloud via the Particle iOS SDK (CocoaPods) and provides:
+
+* **Door control** -- Force press (3D Touch) the Small or Big door button to toggle
+* **Door status** -- Visual indicators show open/closed state with open duration timers
+* **Parking distance** -- Shows car distance in inches with a progress bar
+* **Signal strength** -- Displays WiFi RSSI and last update time
+* **Real-time updates** -- Subscribes to heartbeat and door-status-change events via Particle Cloud SSE
+
+### watchOS App
+
+The Apple Watch companion app is a standalone SwiftUI app that talks directly to the Particle Cloud REST API -- no iPhone required. It works independently over WiFi or cellular.
+
+* **Crown dial to trigger** -- Rotate the Digital Crown to fill a ring; when it reaches the threshold, the door toggles. This intentional gesture prevents accidental triggers.
+* **Haptic feedback** -- Subtle clicks at 50% and 75%, satisfying success haptic at 100%
+* **Door status** -- Full blue ring = closed, empty ring = open. Polls every 10 seconds.
+* **Optimistic updates** -- Icon morphs immediately on trigger using SF Symbol animations, then confirms with the cloud
+* **Decay** -- Ring fades back to zero after 1 second of inactivity
+* **Two pages** -- Swipe horizontally between Small Door and Big Door
+
+## Project Structure
+
+```
+garageos/
+  firmware/
+    garageos.ino          # Main Particle Photon firmware
+    statistic.h/.cpp      # Sensor smoothing library
+    webhook.json          # Twilio SMS alert webhook config
+  iOS/
+    GarageOS/             # iPhone app (UIKit + Particle SDK)
+      AppDelegate.swift
+      ViewController.swift
+      GarageClient.swift  # Particle Cloud singleton
+      Secrets.swift       # Credentials (gitignored)
+    GarageOSWatch/        # Watch app (SwiftUI + REST API)
+      GarageOSWatchApp.swift
+      DoorDialView.swift  # Crown dial UI
+      GarageManager.swift # Status polling + door toggle
+      ParticleAPI.swift   # Direct Particle Cloud REST client
+    Podfile               # CocoaPods (iOS app only)
+  images/
+    garageos-fritzing.png # Wiring diagram
+    garageos-fritzing.fzz # Editable Fritzing source
+```
+
+## Setup
+
+### Prerequisites
+
+* Xcode 15+
+* CocoaPods (`brew install cocoapods`)
+* A Particle Photon with the firmware flashed
+* A Particle Cloud account
+
+### iOS & watchOS apps
+
+1. Clone the repo
+2. Create `iOS/GarageOS/Secrets.swift` with your credentials:
+   ```swift
+   public class Secrets {
+       static let particleUser: String = "your@email.com"
+       static let particlePassword: String = "your-password"
+       static let particleDeviceID: String = "your-device-id"
+   }
+   ```
+3. Install pods:
+   ```
+   cd iOS
+   pod install
+   ```
+4. Open `iOS/GarageOS.xcworkspace` in Xcode
+5. Build and run the **GarageOS** scheme for iPhone
+6. Build and run the **GarageOSWatch** scheme for Apple Watch
+
+### Firmware
+
+1. Set up your Particle Photon on your WiFi network via the [Particle app](https://docs.particle.io/getting-started/getting-started/photon/)
+2. Flash `firmware/garageos.ino` via the [Particle Web IDE](https://build.particle.io) or Particle CLI
+3. Wire up the hardware per the [wiring diagram](images/garageos-fritzing.png)
+
+## License
+
+[MIT](LICENSE)
