@@ -165,6 +165,8 @@ struct DoorDialView: View {
                     hitHalf = false
                     hitThreeQuarter = false
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        crownValue = 0
+                        ringLevel = 0
                         triggered = false
                         resetting = false
                     }
