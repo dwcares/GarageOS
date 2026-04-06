@@ -100,10 +100,10 @@ class ViewController: UIViewController, GarageClientDelegate {
     func statusInfoUpdated(_ signalStrength:Int, lastUpdate:String, uptime: Int) {
         DispatchQueue.main.async(execute: {
             if (self.smallDoorStatus == nil) { return };
-            
-            self.labelSignal.text = String(signalStrength) + "db"
+
+            self.updateSignalDisplay(signalStrength)
             self.labelLastUpdate.text = lastUpdate
-            
+
             if (uptime > 0) {
                 self.labelUIUptime.isHidden = false
                 self.labelUptime.text = uptime.msToSeconds.minuteSecondMS
@@ -111,7 +111,46 @@ class ViewController: UIViewController, GarageClientDelegate {
                 self.labelUIUptime.isHidden = true
             }
         })
-        
+
+    }
+
+    func updateSignalDisplay(_ rssi: Int) {
+        // RSSI ranges: > -50 excellent, -50 to -60 good, -60 to -70 fair, < -70 weak
+        let symbolName: String
+        if rssi > -50 {
+            symbolName = "wifi"                    // Full
+        } else if rssi > -60 {
+            symbolName = "wifi"                    // Good (full icon, we'll tint)
+        } else if rssi > -70 {
+            symbolName = "wifi.exclamationmark"    // Fair
+        } else {
+            symbolName = "wifi.slash"              // Weak/bad
+        }
+
+        let tintColor: UIColor
+        if rssi > -50 {
+            tintColor = .systemBlue
+        } else if rssi > -60 {
+            tintColor = .systemBlue
+        } else if rssi > -70 {
+            tintColor = .systemOrange
+        } else {
+            tintColor = .systemRed
+        }
+
+        let config = UIImage.SymbolConfiguration(pointSize: 14, weight: .medium)
+        if let image = UIImage(systemName: symbolName, withConfiguration: config) {
+            let attachment = NSTextAttachment()
+            attachment.image = image.withTintColor(tintColor, renderingMode: .alwaysOriginal)
+
+            let attributedString = NSMutableAttributedString(attachment: attachment)
+            attributedString.append(NSAttributedString(string: " \(rssi)db", attributes: [
+                .foregroundColor: tintColor,
+                .font: self.labelSignal.font ?? UIFont.systemFont(ofSize: 14)
+            ]))
+
+            self.labelSignal.attributedText = attributedString
+        }
     }
     
     func doorDurationInfoUpdated(_ smallDoorDuration:Int, bigDoorDuration:Int) {
