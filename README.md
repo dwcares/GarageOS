@@ -5,7 +5,7 @@ A few months ago, the garage door opener motor at my house failed. I don't blame
 Walking through the aisle of a suburban Home Depot, I was amazed to see how many of the garage door openers sold there provided some sort of app to control and get notifications about the door. Those features seem cool, but besides a hefty $200 price premium, I don't just want a smart garage door opener, I want a complete smart garage. So, I bought the cheapest opener for $60 bucks and set off to build a smart garage myself: GarageOS.
 
 ## Scope it out
-Given my [background](http://dwcares.com/2013/08/19/slide-deck-framing/), for most projects that I take on, even the fun ones, I go through a quick process of planning. Really, what's the pain that I'm trying to solve, to make my life better...not just add technology for technology sake (even though there's some of that too).
+Given my background in building products, for most projects that I take on, even the fun ones, I go through a quick process of planning. Really, what's the pain that I'm trying to solve, to make my life better...not just add technology for technology sake (even though there's some of that too).
 
 ### Problems worth solving
 1. When I'm heading out on a walk or a bike ride, I always go out the garage since that's the best way to get to town, and it's where all the wagons, strollers and bikes are stored. This means brining a garage door remote on every walk, if I forget it, I'm essentially locked out. I wish I always had a garage door remote with me.
@@ -132,7 +132,7 @@ A Particle webhook (`firmware/webhook.json`) can be configured with Twilio crede
 
 The iPhone app connects to the Particle Cloud via the Particle iOS SDK (CocoaPods) and provides:
 
-* **Door control** -- Force press (3D Touch) the Small or Big door button to toggle
+* **Door control** -- Press the Small or Big door button to toggle
 * **Door status** -- Visual indicators show open/closed state with open duration timers
 * **Parking distance** -- Shows car distance in inches with a progress bar
 * **Signal strength** -- Displays WiFi RSSI and last update time
@@ -142,11 +142,9 @@ The iPhone app connects to the Particle Cloud via the Particle iOS SDK (CocoaPod
 
 The Apple Watch companion app is a standalone SwiftUI app that talks directly to the Particle Cloud REST API -- no iPhone required. It works independently over WiFi or cellular.
 
-* **Crown dial to trigger** -- Rotate the Digital Crown to fill a ring; when it reaches the threshold, the door toggles. This intentional gesture prevents accidental triggers.
-* **Haptic feedback** -- Subtle clicks at 50% and 75%, satisfying success haptic at 100%
+* **Crown dial to trigger** -- Rotate the Digital Crown to fill a ringto toggle the door. This intentional gesture prevents accidental triggers.
+* **Haptic feedback** -- Subtle clicks and satisfying success haptic at 100%
 * **Door status** -- Full blue ring = closed, empty ring = open. Polls every 10 seconds.
-* **Optimistic updates** -- Icon morphs immediately on trigger using SF Symbol animations, then confirms with the cloud
-* **Decay** -- Ring fades back to zero after 1 second of inactivity
 * **Two pages** -- Swipe horizontally between Small Door and Big Door
 
 ## Project Structure
